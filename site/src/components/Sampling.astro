@@ -1,0 +1,35 @@
+---
+import Image from './Image.astro';
+import Arrow from './Arrow.astro';
+import Plus from './svgs/Plus.astro';
+
+interface Props {
+	src: string;
+	name: string;
+}
+
+const { src, name } = Astro.props;
+---
+
+<div class='flex flex-col gap-4'>
+	<div
+		class='font-mono w-fit border-4 border-secondary rounded-xl px-4 py-2 bg-primary text-2xl font-bold text-secondary'
+	>
+		{name}
+	</div>
+	<div class='flex flex-row gap-3 items-center'>
+		<Image class='bg-gray-500' src={`/${src}-y.png`} />
+		<Plus class='w-16 h-16' />
+		<Image
+			class='bg-gradient-to-br from-cb-blue to-cb-green'
+			src={`/${src}-cb.png`}
+		/>
+		<Plus class='w-16 h-16' />
+		<Image
+			class='bg-gradient-to-br from-cr-red to-cr-green'
+			src={`/${src}-cr.png`}
+		/>
+		<Arrow class='-rotate-90 mx-12' />
+		<Image class='bg-secondary' src={`/${src}-rgb.png`} />
+	</div>
+</div>

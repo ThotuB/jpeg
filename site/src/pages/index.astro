@@ -1,0 +1,61 @@
+---
+import Footer from 'components/Footer.astro';
+import Header from 'components/Header.astro';
+import Main from 'components/Main.astro';
+import Modal from '../layouts/Modal.astro';
+import RetroCircle from '../layouts/RetroCircle.astro';
+import '../styles/global.css';
+---
+
+<!DOCTYPE html>
+<html lang='en'>
+	<head>
+		<meta charset='utf-8' />
+		<meta
+			name='viewport'
+			content='width=device-width, initial-scale=1, shrink-to-fit=yes'
+		/>
+		<meta name='description' content='' />
+		<meta name='author' content='' />
+		<title>JPEG Compression</title>
+
+		<link rel='icon' type='image/x-icon' href='favicon.svg' />
+	</head>
+	<body
+		data-theme='pink-purple'
+		class='scrollbar overflow-hidden font-bit bg-primary max-h-screen'
+	>
+		<Modal id='modal-img'>
+			<RetroCircle>
+				<img
+					class='pixelated rounded-xl h-full'
+					src='anime.png'
+					alt='anime'
+				/>
+			</RetroCircle>
+		</Modal>
+		<div class='scrollbar overflow-x-hidden max-h-screen'>
+			<Header />
+			<Main />
+			<Footer />
+		</div>
+	</body>
+
+	<script>
+		const scrollToWindowHash = () => {
+			const hash = window.location.hash;
+
+			if (!hash) {
+				return;
+			}
+
+			const section = document.querySelector(hash);
+
+			if (section) {
+				section.scrollIntoView();
+			}
+		};
+
+		scrollToWindowHash();
+	</script>
+</html>

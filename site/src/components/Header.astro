@@ -1,0 +1,24 @@
+---
+import HeaderArrow from './HeaderArrow.astro';
+import ThemeSelect from './ThemeSelect.tsx';
+---
+
+<header>
+	<div class='relative'>
+		<ThemeSelect client:load client:only />
+		<div class='bg-secondary flex flex-row justify-center pt-12 pb-8'>
+			<div class='relative text-8xl font-bold'>
+				<h1 class='absolute text-primary z-20'>JPEG</h1>
+				<h1 class='text-transparent'>JPEG</h1>
+			</div>
+		</div>
+		<div class='-mt-6 mb-12'>
+			<HeaderArrow color='bg-retro-1' />
+			<HeaderArrow color='bg-retro-2' />
+			<HeaderArrow color='bg-retro-3' />
+			<HeaderArrow color='bg-retro-4' />
+			<HeaderArrow color='bg-retro-5' />
+			<HeaderArrow color='bg-retro-6' />
+		</div>
+	</div>
+</header>

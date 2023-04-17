@@ -1,0 +1,630 @@
+---
+import Arrow from 'components/Arrow.astro';
+import Chapter from 'components/Chapter.astro';
+import Image from 'components/Image.astro';
+import Quantization from 'components/Quantization.astro';
+import QuantizationTable from 'components/QuantizationTable.astro';
+import Sampling from 'components/Sampling.astro';
+import Section from 'components/Section.astro';
+import SectionHeader from 'components/SectionHeader.astro';
+import Entropy from 'components/svgs/Entropy.astro';
+import Huffman from 'components/svgs/Huffman.astro';
+import { QUANTUMS_10, QUANTUMS_50, QUANTUMS_90 } from '../consts';
+import Matrix from './Matrix.astro';
+
+const progress = (task: string, progress: number, total: number) => {
+	return `${task} [${'#'.repeat(progress)}${' '.repeat(10 - progress)}] ${
+		(progress / total) * 100
+	}%`;
+};
+---
+
+<main class='flex flex-col'>
+	<div class='flex flex-row items-center justify-center'>
+		<Image class='bg-secondary w-96 h-96 p-4 rounded-3xl' src='anime.png' />
+	</div>
+
+	<!--? COMPRESSION -->
+	<Chapter title='Compression' class='bg-retro-2'>
+		<!--? Image -->
+		<SectionHeader title='Image' />
+		<Section
+			text={['The given image^C', '']}
+			subtext='Starting compression...'
+		>
+			<Image class='bg-secondary' src='anime.png' />
+			<div slot='right' class='text-retro-3'>
+				$ Starting compression...
+			</div>
+		</Section>
+
+		<!--? RGB -->
+		<SectionHeader title='R, G, B Channel Splitting'>
+			<div class='relative flex-1 h-full w-full'>
+				<Arrow class='absolute left-1/3 -top-6 rotate-45' />
+				<Arrow class='absolute left-1/2 -top-6' />
+				<Arrow class='absolute left-2/3 -top-6 -rotate-45' />
+			</div>
+		</SectionHeader>
+		<Section
+			text={[
+				'Splitting of the image into the red, green and blue channels.',
+				'',
+				'* JPEG compression does not support alpha channels.',
+			]}
+			subtext={progress('Compressing', 1, 10)}
+		>
+			<Image class='bg-red-500' src='compression/rgb_r.png' />
+			<Image class='bg-green-500' src='compression/rgb_g.png' />
+			<Image class='bg-blue-500' src='compression/rgb_b.png' />
+		</Section>
+
+		<!--? Color Space Transformation -->
+		<SectionHeader title='Color Space Transformation'>
+			<div class='relative flex-1 h-full w-full'>
+				<Arrow class='absolute left-1/4 -top-6' />
+				<Arrow class='absolute left-1/3 -top-6 -rotate-45' />
+				<Arrow class='absolute left-1/2 -top-6' />
+				<Arrow class='absolute left-1/3 -top-6 rotate-45' />
+				<Arrow class='absolute left-2/3 -top-6 -rotate-45' />
+				<Arrow class='absolute left-3/4 -top-6' />
+				<Arrow class='absolute left-2/3 -top-6 rotate-45' />
+			</div>
+		</SectionHeader>
+		<Section
+			text={[
+				'Transformation from the RGB color space to YCbCr.',
+				'',
+				'Y - luma',
+				'Cb - chroma-blue',
+				'Cr - chroma-red',
+				'',
+				'Y  =       0.299 * R + 0.587 * G + 0.144 * B',
+				'Cb = 128 - 0.168 * R - 0.331 * G +   0.5 * B',
+				'Cr = 128 +   0.5 * R - 0.418 * G - 0.081 * B',
+			]}
+			subtext={progress('Compressing', 2, 10)}
+		>
+			<Image class='bg-gray-500' src='compression/ycbcr_y.png' />
+			<Image
+				class='bg-gradient-to-br from-cb-blue to-cb-green'
+				src='compression/ycbcr_cb.png'
+			/>
+			<Image
+				class='bg-gradient-to-br from-cr-red to-cr-green'
+				src='compression/ycbcr_cr.png'
+			/>
+		</Section>
+
+		<!--? Chroma Subsampling -->
+		<SectionHeader title='Chroma Subsampling'>
+			<div class='relative flex-1 h-full w-full'>
+				<Arrow class='absolute left-1/4 -top-6' />
+				<Arrow class='absolute left-1/2 -top-6' />
+				<Arrow class='absolute left-3/4 -top-6' />
+			</div>
+		</SectionHeader>
+		<Section
+			text={[
+				'Encode images by implementing less resolution for chroma information than from luma information.',
+				'',
+				'* Takes advantage of the human visual system lower acuity for color differences than for luminance',
+			]}
+			subtext={progress('Compressing', 3, 10)}
+		>
+			<Image class='bg-gray-500' src='compression/ycbcr_y.png' />
+			<Image
+				class='bg-gradient-to-br from-cb-green to-cb-blue'
+				src='compression/sub_cb.png'
+			/>
+			<Image
+				class='bg-gradient-to-br from-cr-green to-cr-red'
+				src='compression/sub_cr.png'
+			/>
+		</Section>
+
+		<!--? Block Splitting -->
+		<SectionHeader title='Block Splitting' />
+		<Section
+			text={[
+				'Splitting of the channels into streams of 8x8 chunks to be passed to the DCT.',
+			]}
+			subtext={progress('Compressing', 4, 10)}
+		>
+			<Image class='bg-gray-500' src='chunk/chunk.png' />
+		</Section>
+
+		<!--? DCT -->
+		<SectionHeader title='Discrete Cosine Transform'>
+			<div class='relative w-full'>
+				<div
+					class='absolute w-full flex flex-row justify-center -top-6 items-center gap-10'
+				>
+					<div
+						class='font-mono border-4 border-secondary rounded-xl px-3 py-2 bg-primary text-2xl font-bold text-secondary grid grid-cols-4 grid-flow-row gap-x-0.5'
+					>
+						{'DCT COEF'.split('').map((c) => <div>{c}</div>)}
+					</div>
+					<div class='font-mono text-secondary text-6xl font-black'>
+						⋅
+					</div>
+					<Arrow />
+					<div class='font-mono text-secondary text-6xl font-black'>
+						⋅
+					</div>
+					<div
+						class='relative font-mono border-4 border-secondary rounded-xl px-3 py-2 bg-primary text-2xl font-bold text-secondary grid grid-cols-4 grid-flow-row gap-x-0.5'
+					>
+						<div class='absolute -right-8 -top-6 text-5xl'>T</div>
+						{'DCT COEF'.split('').map((c) => <div>{c}</div>)}
+					</div>
+				</div>
+			</div>
+		</SectionHeader>
+		<Section subtext={progress('Compressing', 5, 10)}>
+			<Image class='bg-gray-500' src='chunk/chunk_dct.png' />
+		</Section>
+
+		<!--? Quantization -->
+		<SectionHeader title='Quantization'>
+			<div class='relative flex-1 h-full w-full'>
+				<div
+					class='absolute left-1/2 -top-6 flex flex-row items-center gap-10'
+				>
+					<Arrow />
+					<div class='font-mono text-secondary text-6xl font-black'>
+						/
+					</div>
+					<div
+						class='font-mono border-4 border-secondary rounded-xl px-3 py-2 bg-primary text-2xl font-bold text-secondary grid grid-cols-4 grid-flow-row gap-x-0.5'
+					>
+						{'QNTZMTRX'.split('').map((c) => <div>{c}</div>)}
+					</div>
+				</div>
+			</div>
+		</SectionHeader>
+		<Section
+			text={[
+				'Process of dividing the frequency matrix element-wise by a quantization matrix in order to provide more resolution to more perceivable frequency components (low frequency) and to get rid of less perceivable components (high frequency).',
+				'',
+				'Reduction factor can be varied by changing the quantization matrix.',
+				'',
+				'* Lossy process',
+			]}
+			subtext={progress('Compressing', 6, 10)}
+		>
+			<Image class='bg-gray-500' src='chunk/chunk_quant.png' />
+		</Section>
+
+		<!--? Entropy Encoding -->
+		<SectionHeader title='Entropy Encoding'>
+			<div class='relative flex-1 h-full w-full'>
+				<Arrow class='absolute left-1/2 -top-6' />
+			</div>
+		</SectionHeader>
+		<Section
+			text={[
+				'Order coefficients in a zig-zag manner to maximize the chance of a large sequence of 0s, which can be encoded more efficiently.',
+				'',
+				'* Lossless process',
+			]}
+			subtext={progress('Compressing', 7, 10)}
+		>
+			<div class='flex flex-col gap-4 items-center'>
+				<div class='relative'>
+					<Entropy />
+					<Image class='bg-gray-500' src='chunk/chunk_quant.png' />
+				</div>
+				<Arrow />
+				<div
+					class='font-mono border-4 border-secondary rounded-xl px-4 py-2 bg-primary text-2xl font-bold text-secondary'
+				>
+					35, 12, -12, 0, -5, 0, -1, 0, 0, 9, 0, 4, 0, 0, 0, 0 ...
+				</div>
+			</div>
+		</Section>
+
+		<!--? Run-Length Encoding -->
+		<SectionHeader title='Run-Length Encoding'>
+			<div class='relative flex-1 h-full w-full'>
+				<Arrow class='absolute left-1/2 -top-6' />
+			</div>
+		</SectionHeader>
+		<Section
+			text={[
+				'JPEG specific run-length encoding turns the stream of coefficients into a stream of tuples of the form:',
+				'',
+				'[(r, s), c]',
+				'r - preceding 0s',
+				's - bit size of coefficient',
+				'c - coefficient value',
+				'',
+				'* [(0, 0)] - End of block',
+			]}
+			subtext={progress('Compressing', 8, 10)}
+		>
+			<div
+				class='font-mono border-4 border-secondary rounded-xl px-4 py-4 bg-primary text-2xl font-bold text-secondary'
+			>
+				{'{'}
+				[(0, 6), 35],
+				<br />  [(0, 4), 12],
+				<br />  [(0, 4),-12],
+				<br />  [(1, 3), -5],
+				<br />  [(1, 1), -1],
+				<br />  [(2, 4),  9],
+				<br />  [(2, 2),  4],
+				<br />  [(0, 0)]     
+				{'}'}
+			</div>
+		</Section>
+
+		<!--? Huffman Encoding -->
+		<SectionHeader title='Huffman Encoding'>
+			<div class='relative flex-1 h-full w-full'>
+				<Arrow class='absolute left-1/2 -top-6' />
+			</div>
+		</SectionHeader>
+		<Section
+			text={[
+				'Construct a Huffman tree from the tuples and encode the stream using the tree.',
+			]}
+			subtext={progress('Compressing', 9, 10)}
+		>
+			<div>
+				<Huffman />
+			</div>
+			<div
+				class='font-mono border-4 border-secondary rounded-xl px-4 py-2 bg-primary text-2xl font-bold text-secondary'
+			>
+				0010110100101010001001...
+			</div>
+		</Section>
+
+		<!--? JPEG -->
+		<SectionHeader title='JPEG'>
+			<div class='relative flex-1 h-full w-full'>
+				<Arrow class='absolute left-1/2 -top-6' />
+			</div>
+		</SectionHeader>
+		<Section
+			text={[
+				'soi - start of image marker',
+				'app0 - app specific metadata',
+				'dqt - specifies one or more quantization tables',
+				'dht - specifies one or more huffman table',
+				'sof0 - specifies the image dimensions, the number of components and the component subsampling',
+				'sos - start of scan marker',
+				'eoi - end of image marker',
+			]}
+			subtext={progress('Compressing', 10, 10) + ' - COMPLETE'}
+		>
+			<div
+				class='font-mono border-4 border-secondary rounded-xl py-4 px-8 bg-primary text-2xl font-bold text-secondary'
+			>
+				<pre><span class="text-retro-2">struct</span> <span class="text-retro-7">Jpeg</span> {'{'}<br /></pre>
+				<pre>	soi	  <span class="text-retro-7">byte</span>[2]; <span class="text-retro-4"># start of image</span><br /></pre>
+				<pre>	app0  <span class="text-retro-7">App0</span>;    <span class="text-retro-4"># app specific metadata</span><br /></pre>
+				<pre>	dqt   <span class="text-retro-7">Dqt</span>[];   <span class="text-retro-4"># quantization tables</span><br /></pre>
+				<pre>	dht   <span class="text-retro-7">Dht</span>[];   <span class="text-retro-4"># huffman tables</span><br /></pre>
+				<pre>	sof0  <span class="text-retro-7">Sof0</span>;    <span class="text-retro-4"># start of frame</span><br /></pre>
+				<pre>	sos   <span class="text-retro-7">byte</span>[2]; <span class="text-retro-4"># start of scan</span><br /></pre>
+				<pre>	data  <span class="text-retro-7">byte</span>[];  <span class="text-retro-4"># compressed data</span><br /></pre>
+				<pre>	eoi   <span class="text-retro-7">byte</span>[2]; <span class="text-retro-4"># end of image</span><br /></pre>
+				{'}'}
+			</div>
+		</Section>
+	</Chapter>
+
+	<!--! DECOMPRESSION -->
+	<Chapter title='Decompression' class='bg-retro-2'>
+		<Section subtext='Starting decompression...'>
+			<div
+				class='font-mono border-4 border-secondary rounded-xl py-4 px-8 bg-primary text-2xl font-bold text-secondary'
+			>
+				<pre>     00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F Decoded text</pre>
+				<pre><span class="text-retro-1">0000</span> FF DB FF E0 00 10 4A <span class="bg-retro-2">46</span> 49 46 00 01 01 01 00 48 ......J<span class="bg-retro-2">F</span>IF.....H</pre>
+				<pre><span class="text-retro-1">0010</span> 00 48 00 00 FF DB 00 43 00 06 04 05 06 05 04 06 .H.....C........</pre>
+				<pre><span class="text-retro-1">0020</span> 06 05 06 07 07 06 08 0A 10 0A 0A 09 09 0A 14 0E ................</pre>
+				<pre><span class="text-retro-1">0030</span> 0F 0C 10 17 14 18 18 17 14 16 16 1A 1D 25 1F 1A .............%..</pre>
+				<pre><span class="text-retro-1">0040</span> 1B 23 1C 16 16 20 2C 20 23 26 27 29 2A 29 19 1F .#... , #&')*)..</pre>
+				<pre>     . . .</pre>
+			</div>
+		</Section>
+		<!--! JPEG -->
+		<SectionHeader title='JPEG Data'>
+			<div class='relative flex-1 h-full w-full'>
+				<Arrow class='absolute left-1/2 -top-6' />
+			</div>
+		</SectionHeader>
+		<Section
+			text={['Extracting the huffman tables and the compressed data.']}
+			subtext={progress('Decompressing', 1, 10)}
+		>
+			<div>
+				<Huffman />
+			</div>
+			<div
+				class='font-mono border-4 border-secondary rounded-xl px-4 py-2 bg-primary text-2xl font-bold text-secondary'
+			>
+				0010110100101010001001...
+			</div>
+		</Section>
+
+		<!--! Huffman Decoding -->
+		<SectionHeader title='Huffman Decoding'>
+			<div class='relative flex-1 h-full w-full'>
+				<Arrow class='absolute left-1/2 -top-6' />
+			</div>
+		</SectionHeader>
+		<Section
+			text={[
+				'Decoding the compressed data using the huffman tables. Following the binary sequence, descending the tree until a leaf is reached. The value of the leaf is the decoded symbol.',
+			]}
+			subtext={progress('Decompressing', 2, 10)}
+		>
+			<div
+				class='font-mono border-4 border-secondary rounded-xl px-4 py-4 bg-primary text-2xl font-bold text-secondary'
+			>
+				{'{'}
+				[(0, 6), 35],
+				<br />  [(0, 4), 12],
+				<br />  [(0, 4), 12],
+				<br />  [(1, 3), -5],
+				<br />  [(1, 1), -1],
+				<br />  [(2, 4),  9],
+				<br />  [(2, 2),  4],
+				<br />  [(0, 0)]     
+				{'}'}
+			</div>
+		</Section>
+		<!--! Run-Length Decoding -->
+		<SectionHeader title='Run-Length Decoding'>
+			<div class='relative flex-1 h-full w-full'>
+				<Arrow class='absolute left-1/2 -top-6' />
+			</div>
+		</SectionHeader>
+		<Section
+			text={['Unpacking the tuples into a stream of 0s and values.']}
+			subtext={progress('Decompressing', 3, 10)}
+		>
+			<div
+				class='font-mono border-4 border-secondary rounded-xl px-4 py-2 bg-primary text-2xl font-bold text-secondary'
+			>
+				35, 12, -12, 0, -5, 0, -1, 0, 0, 9, 0, 4, 0, 0, 0, 0 ...
+			</div>
+		</Section>
+
+		<!--! Entropy Decoding -->
+		<SectionHeader title='Entropy Decoding'>
+			<div class='relative flex-1 h-full w-full'>
+				<Arrow class='absolute left-1/2 -top-6' />
+			</div>
+		</SectionHeader>
+		<Section
+			text={[
+				'Arranging the values back into a 8x8 chunk using a zig-zag pattern.',
+			]}
+			subtext={progress('Decompressing', 4, 10)}
+		>
+			<div class='relative'>
+				<Entropy />
+				<Image class='bg-gray-500' src='chunk/chunk_quant.png' />
+			</div>
+		</Section>
+
+		<!--! Dequantization -->
+		<SectionHeader title='Dequantization'>
+			<div class='flex flex-row justify-center align-center'>
+				<Arrow />
+				<div class='font-mono text-secondary text-6xl font-black'>
+					∘
+				</div>
+				<Matrix text='QNTZMTRX' />
+			</div>
+		</SectionHeader>
+		<Section
+			text={[
+				'Multiplying each value by the corresponding value in the quantization table stored in the jpeg file.',
+				'',
+				'* Since the quantization process is lossy, dequantization does not produce the same values as before quantization.',
+			]}
+			subtext={progress('Decompressing', 5, 10)}
+		>
+			<Image class='bg-gray-500' src='chunk/chunk_dequant.png' />
+		</Section>
+
+		<!--! Inverse DCT -->
+		<SectionHeader title='Inverse Discrete Cosine Transform'>
+			<div class='flex flex-row'>
+				<div
+					class='absolute w-full flex flex-row justify-center -top-6 items-center gap-10'
+				>
+					<div
+						class='relative font-mono border-4 border-secondary rounded-xl px-3 py-2 bg-primary text-2xl font-bold text-secondary grid grid-cols-4 grid-flow-row gap-x-0.5'
+					>
+						<div class='absolute -right-8 -top-6 text-5xl'>T</div>
+						{'IDCTCOEF'.split('').map((c) => <div>{c}</div>)}
+					</div>
+					<div class='font-mono text-secondary text-6xl font-black'>
+						⋅
+					</div>
+					<Arrow />
+					<div class='font-mono text-secondary text-6xl font-black'>
+						⋅
+					</div>
+					<Matrix text='IDCTCOEF' />
+				</div>
+			</div>
+		</SectionHeader>
+		<Section subtext={progress('Decompressing', 6, 10)}>
+			<Image class='bg-gray-500' src='chunk/chunk_idct.png' />
+		</Section>
+
+		<!--! Block Merging -->
+		<SectionHeader title='Block Merging' />
+		<Section
+			text={[
+				'Merging of the streams of 8x8 chunks into their respective channel, with dimensions of the original subsampled channels.',
+			]}
+			subtext={progress('Decompressing', 7, 10)}
+		>
+			<Image class='bg-gray-500' src='decompression/decomp_y.png' />
+			<Image
+				class='bg-gradient-to-br from-cb-blue to-cb-green'
+				src='decompression/decomp_cb.png'
+			/>
+			<Image
+				class='bg-gradient-to-br from-cr-red to-cr-green'
+				src='decompression/decomp_cr.png'
+			/>
+		</Section>
+
+		<!--! Upsampling -->
+		<SectionHeader title='Upsampling'>
+			<div class='flex flex-row justify-around flex-1'>
+				<Arrow />
+				<Arrow />
+				<Arrow />
+			</div>
+		</SectionHeader>
+		<Section
+			text={[
+				'Duplicaiton of pixels in the chroma channels to match the dimensions of the luminance channel.',
+			]}
+			subtext={progress('Decompressing', 8, 10)}
+		>
+			<Image class='bg-gray-500' src='decompression/decomp_y.png' />
+			<Image
+				class='bg-gradient-to-br from-cb-blue to-cb-green'
+				src='decompression/up_cb.png'
+			/>
+			<Image
+				class='bg-gradient-to-br from-cr-red to-cr-green'
+				src='decompression/up_cr.png'
+			/>
+		</Section>
+
+		<!--! Color Space Transformation -->
+		<SectionHeader title='Color Space Transformation (RGB)'>
+			<div class='flex flex-row justify-evenly flex-1'>
+				<Arrow />
+				<div class='relative'>
+					<Arrow class='absolute rotate-45' />
+					<Arrow class='-rotate-45' />
+				</div>
+				<Arrow />
+				<div class='relative'>
+					<Arrow class='absolute rotate-45' />
+					<Arrow class='-rotate-45' />
+				</div>
+				<Arrow />
+			</div>
+		</SectionHeader>
+		<Section
+			text={[
+				'Transformation from the YCbCr color space to the RGB.',
+				'',
+				'R = Y + 1.402 * (Cr - 128)',
+				'G = Y - 0.344 * (Cb - 128) - 0.714 * (Cr - 128)',
+				'B = Y + 1.772 * (Cb - 128)',
+			]}
+			subtext={progress('Decompressing', 9, 10)}
+		>
+			<Image class='bg-red-500' src='decompression/decomp_r.png' />
+			<Image class='bg-green-500' src='decompression/decomp_g.png' />
+			<Image class='bg-blue-500' src='decompression/decomp_b.png' />
+		</Section>
+
+		<!--! Joining -->
+		<SectionHeader title='R, G, B Channel Joining '>
+			<div class='flex flex-row justify-evenly flex-1'>
+				<Arrow class='-rotate-45' />
+				<Arrow />
+				<Arrow class='rotate-45' />
+			</div>
+		</SectionHeader>
+		<Section
+			text={['Joining the R, G, B channels to form the final image.']}
+			subtext={progress('Decompressing', 10, 10) + ' - COMPLETE'}
+		>
+			<Image class='bg-secondary' src='decompressed.png' />
+		</Section>
+	</Chapter>
+
+	<!--? Observations -->
+	<Chapter title='Observations' class='bg-retro-2'>
+		<!--? Compression-Decompression -->
+		<SectionHeader title='Compression-Decompression' />
+		<div class='flex flex-row gap-16 justify-center items-center'>
+			<Image class='bg-secondary w-1/5 h-1/5' src='anime.png' />
+			<Arrow class='-rotate-90' />
+			<Image class='bg-secondary w-1/5 h-1/5' src='decompressed.png' />
+		</div>
+
+		<!--? Multiple Compression Rounds -->
+		<SectionHeader title='Multiple Compression Rounds' />
+		<div class='flex flex-row gap-16 justify-center items-center'>
+			<Image class='bg-secondary' src='anime.png' />
+			<Arrow class='-rotate-90' />
+			<Image class='bg-secondary' src='decompressed.png' />
+			<Arrow class='-rotate-90' />
+			<div class='flex gap-4'>
+				<div class='rounded-full bg-secondary w-6 h-6'></div>
+				<div class='rounded-full bg-secondary w-6 h-6'></div>
+				<div class='rounded-full bg-secondary w-6 h-6'></div>
+			</div>
+			<Arrow class='-rotate-90' />
+			<Image class='bg-secondary' src='multiple.png' />
+		</div>
+
+		<!--? Different Subsampling -->
+		<SectionHeader title='Different Subsampling' />
+		<div class='flex flex-col justify-center items-center gap-6'>
+			<Sampling src='subsample/original' name='No Chroma Subsampling' />
+			<Sampling src='subsample/422' name='4:2:2 Chroma Subsampling' />
+			<Sampling src='subsample/420' name='4:2:0 Chroma Subsampling' />
+			<Sampling src='subsample/411' name='4:1:1 Chroma Subsampling' />
+			<Sampling src='subsample/y-subsample' name='4:2:0 Y Subsampling' />
+		</div>
+
+		<!--? Different Downsampling -->
+		<SectionHeader title='Different Downsampling' />
+		<div class='flex flex-col justify-center items-center gap-6'>
+			<Sampling src='downsample/original' name='No Chroma Downsampling' />
+			<Sampling
+				src='downsample/average'
+				name='Average Chroma Downsampling'
+			/>
+		</div>
+
+		<!--? Compression-Decompression -->
+		<SectionHeader title='Lossy Compression' />
+		<Quantization src='chunk/chunk' />
+
+		<!--? Different Quantization Tables -->
+		<SectionHeader title='Different Quantization Tables' />
+		<div class='flex flex-col justify-center items-center gap-6'>
+			<div class='flex flex-row gap-16 items-center'>
+				<Image class='bg-gray-500' src='quantize/chunk.png' />
+				<Arrow class='-rotate-90' />
+				<Image class='bg-gray-500' src='quantize/chunk_dct.png' />
+			</div>
+			<QuantizationTable
+				src='quantize/90'
+				name='90'
+				table={QUANTUMS_90}
+			/>
+			<QuantizationTable
+				src='quantize/50'
+				name='50'
+				table={QUANTUMS_50}
+			/>
+			<QuantizationTable
+				src='quantize/10'
+				name='10'
+				table={QUANTUMS_10}
+			/>
+		</div>
+	</Chapter>
+</main>

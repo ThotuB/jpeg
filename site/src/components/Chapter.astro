@@ -1,0 +1,25 @@
+---
+interface Props {
+	title: string;
+	class: string;
+}
+
+const { title, class: className } = Astro.props;
+---
+
+<div class='flex flex-row pb-8 pt-14'>
+	<div class='flex flex-1'>
+		<div class={`${className} -rotate-3 -skew-x-3 flex-1 -mr-1`}></div>
+		<div
+			class={`${className} -mr-1 rotate-3 skew-x-3 flex flex-col justify-center`}
+		>
+			<h2 class='text-4xl text-primary font-black p-8 uppercase'>
+				{title}
+			</h2>
+		</div>
+	</div>
+	<div class='flex-1'></div>
+</div>
+<div class='flex flex-col pt-2 pb-12'>
+	<slot />
+</div>

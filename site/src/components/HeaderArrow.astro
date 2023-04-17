@@ -1,0 +1,12 @@
+---
+interface Props {
+	color: string;
+}
+
+const { color } = Astro.props as Props;
+---
+
+<div class='flex flex-row -mt-1'>
+	<div class={`${color} -mr-px h-8 rotate-2 skew-x-2 flex-1`}></div>
+	<div class={`${color} -ml-px h-8 -rotate-2 -skew-x-2 flex-1`}></div>
+</div>

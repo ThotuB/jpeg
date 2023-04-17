@@ -1,0 +1,57 @@
+---
+interface Props {
+	title: string;
+	children?: any;
+}
+
+const { title } = Astro.props;
+
+const kebabCaseTitle = title
+	.replace(/[^\w\s]/g, '')
+	.replace(/([a-z])([A-Z])/g, '$1-$2')
+	.replace(/\s+/g, '-')
+	.toLowerCase();
+---
+
+<div data-section id={kebabCaseTitle} class='flex flex-row pb-8 pt-14'>
+	<div class='flex-1 relative'>
+		<div class='absolute w-full -top-6'>
+			<slot />
+		</div>
+	</div>
+	<div class='flex flex-row flex-1 h-min'>
+		<div
+			class='bg-secondary -mr-1 -rotate-2 -skew-x-2 flex flex-col justify-center'
+		>
+			<h2 class='text-2xl text-primary font-black px-8 py-4'>
+				{title}
+			</h2>
+		</div>
+		<div class='bg-secondary rotate-2 skew-x-2 flex-1 -mr-px'></div>
+	</div>
+</div>
+
+<script>
+	const sections = document.querySelectorAll<HTMLElement>('[data-section]');
+
+	const observer = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((entry) => {
+				if (!entry.isIntersecting) {
+					return;
+				}
+
+				const sectionId = entry.target.id;
+
+				history.pushState({}, sectionId, `#${sectionId}`);
+			});
+		},
+		{
+			rootMargin: '-20% 0px -80% 0px',
+		},
+	);
+
+	sections.forEach((section) => {
+		observer.observe(section);
+	});
+</script>

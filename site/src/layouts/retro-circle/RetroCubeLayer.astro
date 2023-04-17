@@ -1,0 +1,13 @@
+---
+interface Props {
+	class: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div
+	class={`w-full h-full p-4 rounded-2xl transition-transform duration-500 ${className}`}
+>
+	<slot />
+</div>

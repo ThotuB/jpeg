@@ -1,0 +1,27 @@
+---
+import RetroCubeLayer from './retro-circle/RetroCubeLayer.astro';
+---
+
+<div class='group max-w-3xl w-full aspect-square'>
+	<RetroCubeLayer class='bg-retro-1 group-hover:rotate-[24deg]'>
+		<RetroCubeLayer class='bg-retro-2 group-hover:-rotate-[4deg]'>
+			<RetroCubeLayer class='bg-retro-3 group-hover:-rotate-[4deg]'>
+				<RetroCubeLayer class='bg-retro-4 group-hover:-rotate-[4deg]'>
+					<RetroCubeLayer
+						class='bg-retro-5 group-hover:-rotate-[4deg]'
+					>
+						<RetroCubeLayer
+							class='bg-retro-6 group-hover:-rotate-[4deg]'
+						>
+							<div
+								class='w-full h-full rounded-2xl transition-transform duration-500 group-hover:-rotate-[4deg]'
+							>
+								<slot />
+							</div>
+						</RetroCubeLayer>
+					</RetroCubeLayer>
+				</RetroCubeLayer>
+			</RetroCubeLayer>
+		</RetroCubeLayer>
+	</RetroCubeLayer>
+</div>

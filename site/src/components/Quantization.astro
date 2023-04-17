@@ -1,0 +1,52 @@
+---
+import Image from './Image.astro';
+import Arrow from './Arrow.astro';
+
+interface Props {
+	src: string;
+}
+
+const { src } = Astro.props;
+---
+
+<div
+	class='flex flex-row gap-16 justify-center items-center font-mono font-bold text-secondary text-2xl mt-16'
+>
+	<Image class='bg-gray-500' src={`${src}.png`} />
+	<div class='relative'>
+		<div
+			class='absolute w-96 -top-40 -translate-x-1/2 text-center border-4 border-secondary rounded-xl px-4 py-2 bg-primary'
+		>
+			Discrete Cosine Transform
+		</div>
+		<Arrow class='-rotate-90' />
+	</div>
+	<Image class='bg-gray-500' src={`${src}_dct.png`} />
+	<div class='relative'>
+		<div
+			class='absolute w-96 -top-40 -translate-x-1/2 text-center border-4 border-secondary rounded-xl px-4 py-2 bg-primary'
+		>
+			Quantization
+		</div>
+		<Arrow class='-rotate-90' />
+	</div>
+	<Image class='bg-gray-500' src={`${src}_quant.png`} />
+	<div class='relative'>
+		<div
+			class='absolute w-96 -top-40 -translate-x-1/2 text-center border-4 border-secondary rounded-xl px-4 py-2 bg-primary'
+		>
+			Dequantization
+		</div>
+		<Arrow class='-rotate-90' />
+	</div>
+	<Image class='bg-gray-500' src={`${src}_dequant.png`} />
+	<div class='relative'>
+		<div
+			class='absolute w-96 -top-40 -translate-x-1/2 text-center border-4 border-secondary rounded-xl px-4 py-2 bg-primary'
+		>
+			Inverse DCT
+		</div>
+		<Arrow class='-rotate-90' />
+	</div>
+	<Image class='bg-gray-500' src={`${src}_idct.png`} />
+</div>

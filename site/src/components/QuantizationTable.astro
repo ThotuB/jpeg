@@ -1,0 +1,43 @@
+---
+import Image from './Image.astro';
+import Arrow from './Arrow.astro';
+import Colon from './svgs/Colon.astro';
+
+interface Props {
+	src: string;
+	name: string;
+	table: number[][];
+}
+
+const { src, name, table } = Astro.props;
+---
+
+<div class='flex flex-col gap-4'>
+	<div
+		class='font-mono w-fit border-4 border-secondary rounded-xl px-4 py-2 bg-primary text-2xl font-bold text-secondary'
+	>
+		{name} Factor Quantization
+	</div>
+	<div class='flex flex-row gap-16 items-center'>
+		<div
+			class='font-mono w-fit border-4 border-secondary rounded-xl px-4 py-2 bg-primary text-2xl font-bold text-secondary grid grid-cols-8 grid-flow-row'
+		>
+			{
+				table
+					.flat()
+					.map((v) => (
+						<div class='w-8 h-8 flex justify-center items-center'>
+							{v}
+						</div>
+					))
+			}
+		</div>
+		<Colon class='text-secondary w-12' />
+		<Image class='bg-gray-500' src={`${src}-chunk_quant.png`} />
+		<Arrow class='-rotate-90' />
+		<Image class='bg-gray-500' src={`${src}-chunk_dequant.png`} />
+		<Arrow class='-rotate-90' />
+		<Image class='bg-gray-500' src={`${src}-chunk_idct.png`} />
+		<Image class='bg-gray-500' src={`${src}-rgb.png`} />
+	</div>
+</div>
