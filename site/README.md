@@ -2,6 +2,7 @@
 
 ```
 npm create astro@latest 
+```
 
 Features:
 
