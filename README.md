@@ -19,7 +19,9 @@
 └── tsconfig.json
 ```
 
-## 🧞 Commands
+## 🧞 Commands to Run
+
+* Needs to have Node.js/npm installed: [Download Link](https://nodejs.org/en)
 
 Commands to run from the root in the terminal:
 
