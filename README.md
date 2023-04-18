@@ -5,7 +5,7 @@
 
 Project link: [GitHub](https://github.com/ThotuB/jpeg)
 
-Site link: [GitHub Pages](https://thotub.github.io/jpeg/) (**Might not work yet**)
+Site link: [Vercel](https://jpeg-thotub.vercel.app/)
 
 ## 🚀 Project Structure
 
