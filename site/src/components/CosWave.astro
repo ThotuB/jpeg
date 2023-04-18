@@ -1,0 +1,29 @@
+---
+import CoefSquare from './CoefSquare';
+import ColonIcon from './svgs/ColonIcon.astro';
+import CosineIcon from './svgs/CosineIcon.astro';
+
+interface Props {
+	frequency: number;
+	points: number[];
+}
+
+const { frequency, points = [] } = Astro.props;
+---
+
+<div class='flex flex-row items-center justify-center gap-4 flex-1'>
+	<div class='border-8 border-secondary rounded-3xl py-2 bg-primary'>
+		<CosineIcon
+			frequency={frequency}
+			points={points}
+			class='w-full h-32'
+			viewBox={[200, 100]}
+		/>
+	</div>
+	<ColonIcon class='w-8' />
+	<div
+		class='border-4 border-secondary rounded-2xl flex flex-row text-2xl font-bold font-mono'
+	>
+		{points.map((y) => <CoefSquare value={y} client:only='solid-js' />)}
+	</div>
+</div>

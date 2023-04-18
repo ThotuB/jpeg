@@ -1,0 +1,21 @@
+---
+import CosineIcon from './svgs/CosineIcon.astro';
+
+interface Props {
+	frequency: number;
+}
+
+const { frequency } = Astro.props;
+---
+
+<p class='text-5xl text-secondary font-bold font-mono'>
+	X<sub>{frequency}</sub>
+</p>
+<div class='relative border-8 rounded-xl border-secondary'>
+	<p
+		class='absolute text-secondary text-6xl font-bold font-mono flex justify-center items-center w-full h-full'
+	>
+		C<sub>{frequency}</sub>
+	</p>
+	<CosineIcon frequency={frequency} class='w-32 h-32' viewBox={[100, 100]} />
+</div>

@@ -1,0 +1,42 @@
+---
+import Vector from './Vector.astro';
+
+const dctCoefs = [
+	[1, 1, 1, 1, 1, 1, 1, 1],
+	[0.98, 0.83, 0.56, 0.2, -0.2, -0.56, -0.83, -0.98],
+	[0.92, 0.38, -0.38, -0.92, -0.92, -0.38, 0.38, 0.92],
+	[0.83, -0.2, -0.98, -0.56, 0.56, 0.98, 0.2, -0.83],
+	[0.71, -0.71, -0.71, 0.71, 0.71, -0.71, -0.71, 0.71],
+	[0.56, -0.98, 0.2, 0.83, -0.83, -0.2, 0.98, -0.56],
+	[0.38, -0.92, 0.92, -0.38, -0.38, 0.92, -0.92, 0.38],
+	[0.2, -0.56, 0.83, -0.98, 0.98, -0.83, 0.56, -0.2],
+];
+---
+
+<div id='grid-coefs' class='gap-4'>
+	<div></div>
+	<Vector letter='s' vals={[0, 1, 2, 3, 4, 5, 6, 7]} transposed />
+	<Vector letter='f' vals={[0, 1, 2, 3, 4, 5, 6, 7]} />
+	<div
+		class='grid grid-cols-8 border-2 border-secondary rounded-2xl overflow-hidden'
+	>
+		{
+			dctCoefs.flat().map((coef, _) => (
+				<div
+					class='border-2 border-secondary w-16 h-16'
+					style={{
+						'background-color': `hsl(0, 0%, ${(coef + 1) * 50}%)`,
+					}}
+				/>
+			))
+		}
+	</div>
+</div>
+
+<style>
+	#grid-coefs {
+		display: grid;
+		grid-template-columns: auto auto;
+		grid-auto-flow: row;
+	}
+</style>

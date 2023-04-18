@@ -1,0 +1,18 @@
+---
+interface Props {
+	class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<div class={`${className} w-2 h-44 flex flex-col gap-2`}>
+	{
+		Array.from({ length: 4 }).map((_) => (
+			<>
+				<div class='flex-1 bg-secondary rotate-12 -skew-y-12' />
+				<div class='flex-1 bg-secondary -rotate-12 skew-y-12' />
+			</>
+		))
+	}
+</div>

@@ -1,0 +1,24 @@
+---
+interface Props {
+	letter: string;
+	vals: number[];
+	transposed?: boolean;
+}
+
+const { letter, vals, transposed } = Astro.props;
+---
+
+<div
+	class={` flex ${
+		transposed ? 'flex-row' : 'flex-col'
+	} border-2 border-secondary rounded-2xl text-4xl font-bold text-secondary font-mono overflow-hidden`}
+>
+	{
+		vals.map((y) => (
+			<div class='flex justify-center border-2 border-secondary items-center w-16 h-16'>
+				{letter}
+				<sub>{y}</sub>
+			</div>
+		))
+	}
+</div>

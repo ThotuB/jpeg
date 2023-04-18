@@ -1,13 +1,25 @@
 ---
 interface Props {
-	text: string;
+	letter: string;
+	vals: number[];
 }
 
-const { text } = Astro.props;
+const { letter, vals } = Astro.props;
 ---
 
 <div
-	class='font-mono border-4 border-secondary rounded-xl px-3 py-2 bg-primary text-2xl font-bold text-secondary grid grid-cols-4 grid-flow-row gap-x-0.5'
+	class={`grid grid-cols-8 border-2 border-secondary rounded-2xl text-4xl font-bold text-secondary font-mono overflow-hidden`}
 >
-	{text.split('').map((c) => <div>{c}</div>)}
+	{
+		vals.map((i) => (
+			<>
+				{vals.map((j) => (
+					<div class='flex justify-center border-2 border-secondary items-center w-16 h-16'>
+						{letter}
+						<sub>{`${i}${j}`}</sub>
+					</div>
+				))}
+			</>
+		))
+	}
 </div>

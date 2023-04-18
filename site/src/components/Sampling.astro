@@ -1,7 +1,7 @@
 ---
 import Image from './Image.astro';
-import Arrow from './Arrow.astro';
-import Plus from './svgs/Plus.astro';
+import Arrow from './shapes/Arrow.astro';
+import PlusIcon from './svgs/PlusIcon.astro';
 
 interface Props {
 	src: string;
@@ -17,14 +17,14 @@ const { src, name } = Astro.props;
 	>
 		{name}
 	</div>
-	<div class='flex flex-row gap-3 items-center'>
+	<div class='flex flex-row gap-2 items-center'>
 		<Image class='bg-gray-500' src={`/${src}-y.png`} />
-		<Plus class='w-16 h-16' />
+		<PlusIcon class='w-16 h-16' />
 		<Image
 			class='bg-gradient-to-br from-cb-blue to-cb-green'
 			src={`/${src}-cb.png`}
 		/>
-		<Plus class='w-16 h-16' />
+		<PlusIcon class='w-16 h-16' />
 		<Image
 			class='bg-gradient-to-br from-cr-red to-cr-green'
 			src={`/${src}-cr.png`}

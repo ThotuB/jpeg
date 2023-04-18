@@ -11,16 +11,17 @@ const { src, class: className } = Astro.props as Props;
 	class={`${className} p-2 rounded-2xl w-64 aspect-square`}
 	data-zoom-button
 >
-	<img class='pixelated rounded-xl h-full' src={src} alt='image' />
+	<img
+		class='pixelated rounded-xl h-full select-none'
+		src={src}
+		alt='image'
+	/>
 </button>
 
 <script>
 	const buttons = document.querySelectorAll('[data-zoom-button]');
 	const modal = document.querySelector('#modal-img') as HTMLElement;
 	const modalImg = modal.querySelector('img') as HTMLImageElement;
-
-	// download image
-	// const image =
 
 	buttons.forEach((button) => {
 		button.addEventListener('click', () => {

@@ -1,5 +1,5 @@
 import Cassette from './Cassette.tsx';
-import Select from './utility/Select.tsx';
+import Select from '../utility/Select.tsx';
 import { Theme, themes } from 'types/theme.ts';
 
 export default function ThemeSelect() {

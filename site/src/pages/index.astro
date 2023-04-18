@@ -1,6 +1,6 @@
 ---
-import Footer from 'components/Footer.astro';
-import Header from 'components/Header.astro';
+import Footer from 'components/header-footer/Footer.astro';
+import Header from 'components/header-footer/Header.astro';
 import Main from 'components/Main.astro';
 import Modal from '../layouts/Modal.astro';
 import RetroCircle from '../layouts/RetroCircle.astro';
@@ -28,7 +28,7 @@ import '../styles/global.css';
 		<Modal id='modal-img'>
 			<RetroCircle>
 				<img
-					class='pixelated rounded-xl h-full'
+					class='pixelated rounded-xl h-full select-none'
 					src='anime.png'
 					alt='anime'
 				/>

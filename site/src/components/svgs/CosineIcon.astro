@@ -1,0 +1,71 @@
+---
+interface Props {
+	frequency: number;
+	points?: number[];
+	viewBox?: [number, number];
+	class: string;
+}
+
+const {
+	frequency,
+	points = [],
+	viewBox = [200, 100],
+	class: className,
+} = Astro.props;
+
+const xOff = viewBox[0] / 16;
+const xScale = viewBox[0] / 8;
+const yOff = viewBox[1] / 2;
+const yScale = (viewBox[1] * 4) / 10;
+
+const cosPath = (frequency: number) => {
+	const points = [];
+	const samples = 100;
+
+	const xScale = viewBox[0] / samples;
+
+	for (let i = 0; i <= samples; i++) {
+		const x = i;
+		const y = Math.cos((x / samples) * frequency * Math.PI);
+
+		const xScaled = x * xScale;
+		const yScaled = yOff - y * yScale;
+		points.push(`${xScaled} ${yScaled}`);
+	}
+	return points.join(' L ');
+};
+---
+
+<svg
+	class={`${className} text-secondary`}
+	viewBox={`0 0 ${viewBox[0]} ${viewBox[1]}`}
+>
+	{
+		points.map((y, idx) => (
+			<line
+				class='text-retro-4'
+				x1={idx * xScale + xOff}
+				y1={yOff - y * yScale}
+				x2={idx * xScale + xOff}
+				y2={yOff}
+				stroke='currentColor'
+				stroke-width='2'
+				fill='none'
+			/>
+		))
+	}
+	<!-- x axis -->
+	<path
+		class='text-retro-2'
+		d={`M 0 ${yOff} L ${viewBox[0]} ${yOff}`}
+		stroke='currentColor'
+		stroke-width='2'
+		fill='none'></path>
+	<!-- cos -->
+	<path
+		class='text-retro-2'
+		d={`M 0 10 L ${cosPath(frequency)}`}
+		stroke='currentColor'
+		stroke-width='4'
+		fill='none'></path>
+</svg>

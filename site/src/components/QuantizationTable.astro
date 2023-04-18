@@ -1,7 +1,7 @@
 ---
 import Image from './Image.astro';
-import Arrow from './Arrow.astro';
-import Colon from './svgs/Colon.astro';
+import Arrow from './shapes/Arrow.astro';
+import ColonIcon from './svgs/ColonIcon.astro';
 
 interface Props {
 	src: string;
@@ -32,7 +32,7 @@ const { src, name, table } = Astro.props;
 					))
 			}
 		</div>
-		<Colon class='text-secondary w-12' />
+		<ColonIcon class='text-secondary w-12' />
 		<Image class='bg-gray-500' src={`${src}-chunk_quant.png`} />
 		<Arrow class='-rotate-90' />
 		<Image class='bg-gray-500' src={`${src}-chunk_dequant.png`} />

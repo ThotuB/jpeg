@@ -1,0 +1,41 @@
+---
+import Image from './Image.astro';
+---
+
+<div id='freq-slider-container' class='flex flex-col items-center gap-4'>
+	<Image
+		class='bg-secondary w-96 h-96 p-4 rounded-3xl'
+		src='/frequencies/freqs-64.png'
+	/>
+	<input
+		class='slider appearance-none bg-primary p-1 w-96 border-4 border-secondary'
+		type='range'
+		min='1'
+		max='64'
+		value='64'
+	/>
+</div>
+
+<style>
+	.slider {
+		direction: rtl;
+	}
+
+	.slider::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		appearance: none;
+		width: 40px;
+		height: 20px;
+		background: var(--color-secondary);
+	}
+</style>
+
+<script>
+	const container = document.getElementById('freq-slider-container')!;
+	const image = container.querySelector('img')!;
+	const slider = container.querySelector('input')!;
+
+	slider.addEventListener('input', () => {
+		image.src = `/frequencies/freqs-${slider.value}.png`;
+	});
+</script>

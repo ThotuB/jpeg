@@ -19,6 +19,15 @@
     --color-retro-5: hsl(227, 53%, 32%);
     --color-retro-6: hsl(228, 51%, 25%);
     --color-retro-7: hsl(161, 100%, 43%);
+
+    /* for color lerping  */
+    --h-primary: 249;
+    --s-primary: 23%;
+    --l-primary: 12%;
+
+    --h-secondary: 330;
+    --s-secondary: 29%;
+    --l-secondary: 73%;
   }
 
   [data-theme="yellow-purple"] {
@@ -31,6 +40,14 @@
     --color-retro-5: hsl(277, 66%, 41%);
     --color-retro-6: hsl(251, 66%, 32%);
     --color-retro-7: hsl(161, 100%, 43%);
+
+    /* for color lerping  */
+    --h-primary: 262;
+    --s-primary: 27%;
+    --l-primary: 12%;
+    --h-secondary: 65;
+    --s-secondary: 95%;
+    --l-secondary: 80%;
   }
 
   [data-theme="orange-green"] {
@@ -43,6 +60,14 @@
     --color-retro-5: hsl(186, 50%, 40%);
     --color-retro-6: hsl(206, 60%, 27%);
     --color-retro-7: hsl(161, 100%, 43%);
+
+    /* for color lerping  */
+    --h-primary: 215;
+    --s-primary: 27%;
+    --l-primary: 12%;
+    --h-secondary: 12;
+    --s-secondary: 70%;
+    --l-secondary: 73%;
   }
 
   [data-theme="white-black"] {
@@ -55,6 +80,14 @@
     --color-retro-5: hsl(225, 18%, 20%);
     --color-retro-6: hsl(225, 18%, 14%);
     --color-retro-7: hsl(225, 18%, 50%);
+
+    /* for color lerping  */
+    --h-primary: 225;
+    --s-primary: 18%;
+    --l-primary: 10%;
+    --h-secondary: 225;
+    --s-secondary: 18%;
+    --l-secondary: 98%;
   }
 }
 

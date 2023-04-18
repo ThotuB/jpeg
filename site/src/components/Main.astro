@@ -1,16 +1,27 @@
 ---
-import Arrow from 'components/Arrow.astro';
 import Chapter from 'components/Chapter.astro';
+import CosWave from 'components/CosWave.astro';
 import Image from 'components/Image.astro';
 import Quantization from 'components/Quantization.astro';
 import QuantizationTable from 'components/QuantizationTable.astro';
 import Sampling from 'components/Sampling.astro';
 import Section from 'components/Section.astro';
 import SectionHeader from 'components/SectionHeader.astro';
-import Entropy from 'components/svgs/Entropy.astro';
-import Huffman from 'components/svgs/Huffman.astro';
+import Arrow from 'components/shapes/Arrow.astro';
+import EntropyIcon from 'components/svgs/EntropyIcon.astro';
+import HuffmanIcon from 'components/svgs/HuffmanIcon.astro';
 import { QUANTUMS_10, QUANTUMS_50, QUANTUMS_90 } from '../consts';
-import Matrix from './Matrix.astro';
+import Frequencies from 'components/Frequencies.astro';
+import MiniMatrix from 'components/MiniMatrix.astro';
+import Stream from 'components/shapes/Stream.astro';
+import PlusIcon from 'components/svgs/PlusIcon.astro';
+import Dots from 'components/shapes/Dots.astro';
+import FrequencyCoef from 'components/FrequencyCoef.astro';
+import DctCoefs from 'components/DctCoefs.astro';
+import Vector from 'components/Vector.astro';
+import Matrix from 'components/Matrix.astro';
+import CosineIcon from './svgs/CosineIcon.astro';
+import Fraction from './Fraction.astro';
 
 const progress = (task: string, progress: number, total: number) => {
 	return `${task} [${'#'.repeat(progress)}${' '.repeat(10 - progress)}] ${
@@ -39,12 +50,10 @@ const progress = (task: string, progress: number, total: number) => {
 		</Section>
 
 		<!--? RGB -->
-		<SectionHeader title='R, G, B Channel Splitting'>
-			<div class='relative flex-1 h-full w-full'>
-				<Arrow class='absolute left-1/3 -top-6 rotate-45' />
-				<Arrow class='absolute left-1/2 -top-6' />
-				<Arrow class='absolute left-2/3 -top-6 -rotate-45' />
-			</div>
+		<SectionHeader title='R, G, B Channel Splitting' class='justify-evenly'>
+			<Arrow class='rotate-45' />
+			<Arrow />
+			<Arrow class='-rotate-45' />
 		</SectionHeader>
 		<Section
 			text={[
@@ -60,16 +69,21 @@ const progress = (task: string, progress: number, total: number) => {
 		</Section>
 
 		<!--? Color Space Transformation -->
-		<SectionHeader title='Color Space Transformation'>
-			<div class='relative flex-1 h-full w-full'>
-				<Arrow class='absolute left-1/4 -top-6' />
-				<Arrow class='absolute left-1/3 -top-6 -rotate-45' />
-				<Arrow class='absolute left-1/2 -top-6' />
-				<Arrow class='absolute left-1/3 -top-6 rotate-45' />
-				<Arrow class='absolute left-2/3 -top-6 -rotate-45' />
-				<Arrow class='absolute left-3/4 -top-6' />
-				<Arrow class='absolute left-2/3 -top-6 rotate-45' />
+		<SectionHeader
+			title='Color Space Transformation (YCbCr)'
+			class='justify-evenly'
+		>
+			<Arrow />
+			<div class='relative'>
+				<Arrow class='absolute rotate-45' />
+				<Arrow class='-rotate-45' />
 			</div>
+			<Arrow />
+			<div class='relative'>
+				<Arrow class='absolute rotate-45' />
+				<Arrow class='-rotate-45' />
+			</div>
+			<Arrow />
 		</SectionHeader>
 		<Section
 			text={[
@@ -97,12 +111,10 @@ const progress = (task: string, progress: number, total: number) => {
 		</Section>
 
 		<!--? Chroma Subsampling -->
-		<SectionHeader title='Chroma Subsampling'>
-			<div class='relative flex-1 h-full w-full'>
-				<Arrow class='absolute left-1/4 -top-6' />
-				<Arrow class='absolute left-1/2 -top-6' />
-				<Arrow class='absolute left-3/4 -top-6' />
-			</div>
+		<SectionHeader title='Chroma Subsampling' class='justify-around'>
+			<Arrow />
+			<Arrow />
+			<Arrow />
 		</SectionHeader>
 		<Section
 			text={[
@@ -124,7 +136,10 @@ const progress = (task: string, progress: number, total: number) => {
 		</Section>
 
 		<!--? Block Splitting -->
-		<SectionHeader title='Block Splitting' />
+		<SectionHeader title='Block Splitting' class='justify-around'>
+			<Stream class='-rotate-[60deg] origin-top' />
+			<Stream class='rotate-[60deg] origin-top' />
+		</SectionHeader>
 		<Section
 			text={[
 				'Splitting of the channels into streams of 8x8 chunks to be passed to the DCT.',
@@ -135,29 +150,20 @@ const progress = (task: string, progress: number, total: number) => {
 		</Section>
 
 		<!--? DCT -->
-		<SectionHeader title='Discrete Cosine Transform'>
-			<div class='relative w-full'>
+		<SectionHeader
+			title='Discrete Cosine Transform'
+			class='justify-center items-center gap-10'
+		>
+			<MiniMatrix text='DCT COEF' />
+			<div class='font-mono text-secondary text-6xl font-black'>⋅</div>
+			<Arrow />
+			<div class='font-mono text-secondary text-6xl font-black'>⋅</div>
+			<div class='relative'>
+				<MiniMatrix text='IDCTCOEF' />
 				<div
-					class='absolute w-full flex flex-row justify-center -top-6 items-center gap-10'
+					class='absolute text-secondary font-bold -right-7 -top-5 text-4xl'
 				>
-					<div
-						class='font-mono border-4 border-secondary rounded-xl px-3 py-2 bg-primary text-2xl font-bold text-secondary grid grid-cols-4 grid-flow-row gap-x-0.5'
-					>
-						{'DCT COEF'.split('').map((c) => <div>{c}</div>)}
-					</div>
-					<div class='font-mono text-secondary text-6xl font-black'>
-						⋅
-					</div>
-					<Arrow />
-					<div class='font-mono text-secondary text-6xl font-black'>
-						⋅
-					</div>
-					<div
-						class='relative font-mono border-4 border-secondary rounded-xl px-3 py-2 bg-primary text-2xl font-bold text-secondary grid grid-cols-4 grid-flow-row gap-x-0.5'
-					>
-						<div class='absolute -right-8 -top-6 text-5xl'>T</div>
-						{'DCT COEF'.split('').map((c) => <div>{c}</div>)}
-					</div>
+					T
 				</div>
 			</div>
 		</SectionHeader>
@@ -166,22 +172,15 @@ const progress = (task: string, progress: number, total: number) => {
 		</Section>
 
 		<!--? Quantization -->
-		<SectionHeader title='Quantization'>
-			<div class='relative flex-1 h-full w-full'>
-				<div
-					class='absolute left-1/2 -top-6 flex flex-row items-center gap-10'
-				>
-					<Arrow />
-					<div class='font-mono text-secondary text-6xl font-black'>
-						/
-					</div>
-					<div
-						class='font-mono border-4 border-secondary rounded-xl px-3 py-2 bg-primary text-2xl font-bold text-secondary grid grid-cols-4 grid-flow-row gap-x-0.5'
-					>
-						{'QNTZMTRX'.split('').map((c) => <div>{c}</div>)}
-					</div>
-				</div>
-			</div>
+		<SectionHeader
+			title='Quantization'
+			class='justify-center items-center gap-10'
+		>
+			<div class='w-24'></div>
+			<div class='font-mono text-transparent text-6xl font-black'>/</div>
+			<Arrow />
+			<div class='font-mono text-secondary text-6xl font-black'>/</div>
+			<MiniMatrix text='QNTZMTRX' />
 		</SectionHeader>
 		<Section
 			text={[
@@ -197,10 +196,8 @@ const progress = (task: string, progress: number, total: number) => {
 		</Section>
 
 		<!--? Entropy Encoding -->
-		<SectionHeader title='Entropy Encoding'>
-			<div class='relative flex-1 h-full w-full'>
-				<Arrow class='absolute left-1/2 -top-6' />
-			</div>
+		<SectionHeader title='Entropy Encoding' class='justify-center'>
+			<Arrow />
 		</SectionHeader>
 		<Section
 			text={[
@@ -212,7 +209,7 @@ const progress = (task: string, progress: number, total: number) => {
 		>
 			<div class='flex flex-col gap-4 items-center'>
 				<div class='relative'>
-					<Entropy />
+					<EntropyIcon />
 					<Image class='bg-gray-500' src='chunk/chunk_quant.png' />
 				</div>
 				<Arrow />
@@ -225,10 +222,8 @@ const progress = (task: string, progress: number, total: number) => {
 		</Section>
 
 		<!--? Run-Length Encoding -->
-		<SectionHeader title='Run-Length Encoding'>
-			<div class='relative flex-1 h-full w-full'>
-				<Arrow class='absolute left-1/2 -top-6' />
-			</div>
+		<SectionHeader title='Run-Length Encoding' class='justify-center'>
+			<Arrow />
 		</SectionHeader>
 		<Section
 			text={[
@@ -260,10 +255,8 @@ const progress = (task: string, progress: number, total: number) => {
 		</Section>
 
 		<!--? Huffman Encoding -->
-		<SectionHeader title='Huffman Encoding'>
-			<div class='relative flex-1 h-full w-full'>
-				<Arrow class='absolute left-1/2 -top-6' />
-			</div>
+		<SectionHeader title='Huffman Encoding' class='justify-center'>
+			<Arrow />
 		</SectionHeader>
 		<Section
 			text={[
@@ -272,7 +265,7 @@ const progress = (task: string, progress: number, total: number) => {
 			subtext={progress('Compressing', 9, 10)}
 		>
 			<div>
-				<Huffman />
+				<HuffmanIcon />
 			</div>
 			<div
 				class='font-mono border-4 border-secondary rounded-xl px-4 py-2 bg-primary text-2xl font-bold text-secondary'
@@ -282,10 +275,8 @@ const progress = (task: string, progress: number, total: number) => {
 		</Section>
 
 		<!--? JPEG -->
-		<SectionHeader title='JPEG'>
-			<div class='relative flex-1 h-full w-full'>
-				<Arrow class='absolute left-1/2 -top-6' />
-			</div>
+		<SectionHeader title='JPEG' class='justify-center'>
+			<Arrow />
 		</SectionHeader>
 		<Section
 			text={[
@@ -332,17 +323,15 @@ const progress = (task: string, progress: number, total: number) => {
 			</div>
 		</Section>
 		<!--! JPEG -->
-		<SectionHeader title='JPEG Data'>
-			<div class='relative flex-1 h-full w-full'>
-				<Arrow class='absolute left-1/2 -top-6' />
-			</div>
+		<SectionHeader title='JPEG Data' class='justify-center'>
+			<Arrow />
 		</SectionHeader>
 		<Section
 			text={['Extracting the huffman tables and the compressed data.']}
 			subtext={progress('Decompressing', 1, 10)}
 		>
 			<div>
-				<Huffman />
+				<HuffmanIcon />
 			</div>
 			<div
 				class='font-mono border-4 border-secondary rounded-xl px-4 py-2 bg-primary text-2xl font-bold text-secondary'
@@ -352,10 +341,8 @@ const progress = (task: string, progress: number, total: number) => {
 		</Section>
 
 		<!--! Huffman Decoding -->
-		<SectionHeader title='Huffman Decoding'>
-			<div class='relative flex-1 h-full w-full'>
-				<Arrow class='absolute left-1/2 -top-6' />
-			</div>
+		<SectionHeader title='Huffman Decoding' class='justify-center'>
+			<Arrow />
 		</SectionHeader>
 		<Section
 			text={[
@@ -379,10 +366,8 @@ const progress = (task: string, progress: number, total: number) => {
 			</div>
 		</Section>
 		<!--! Run-Length Decoding -->
-		<SectionHeader title='Run-Length Decoding'>
-			<div class='relative flex-1 h-full w-full'>
-				<Arrow class='absolute left-1/2 -top-6' />
-			</div>
+		<SectionHeader title='Run-Length Decoding' class='justify-center'>
+			<Arrow />
 		</SectionHeader>
 		<Section
 			text={['Unpacking the tuples into a stream of 0s and values.']}
@@ -396,10 +381,8 @@ const progress = (task: string, progress: number, total: number) => {
 		</Section>
 
 		<!--! Entropy Decoding -->
-		<SectionHeader title='Entropy Decoding'>
-			<div class='relative flex-1 h-full w-full'>
-				<Arrow class='absolute left-1/2 -top-6' />
-			</div>
+		<SectionHeader title='Entropy Decoding' class='justify-center'>
+			<Arrow />
 		</SectionHeader>
 		<Section
 			text={[
@@ -408,20 +391,21 @@ const progress = (task: string, progress: number, total: number) => {
 			subtext={progress('Decompressing', 4, 10)}
 		>
 			<div class='relative'>
-				<Entropy />
+				<EntropyIcon />
 				<Image class='bg-gray-500' src='chunk/chunk_quant.png' />
 			</div>
 		</Section>
 
 		<!--! Dequantization -->
-		<SectionHeader title='Dequantization'>
-			<div class='flex flex-row justify-center align-center'>
-				<Arrow />
-				<div class='font-mono text-secondary text-6xl font-black'>
-					∘
-				</div>
-				<Matrix text='QNTZMTRX' />
-			</div>
+		<SectionHeader
+			title='Dequantization'
+			class='justify-center items-center gap-10'
+		>
+			<div class='w-24'></div>
+			<div class='font-mono text-transparent text-6xl font-black'>∘</div>
+			<Arrow />
+			<div class='font-mono text-secondary text-6xl font-black'>∘</div>
+			<MiniMatrix text='QNTZMTRX' />
 		</SectionHeader>
 		<Section
 			text={[
@@ -435,34 +419,32 @@ const progress = (task: string, progress: number, total: number) => {
 		</Section>
 
 		<!--! Inverse DCT -->
-		<SectionHeader title='Inverse Discrete Cosine Transform'>
-			<div class='flex flex-row'>
+		<SectionHeader
+			title='Inverse Discrete Cosine Transform'
+			class='justify-center items-center gap-10'
+		>
+			<div class='relative'>
+				<MiniMatrix text='IDCTCOEF' />
 				<div
-					class='absolute w-full flex flex-row justify-center -top-6 items-center gap-10'
+					class='absolute text-secondary font-bold -right-7 -top-5 text-4xl'
 				>
-					<div
-						class='relative font-mono border-4 border-secondary rounded-xl px-3 py-2 bg-primary text-2xl font-bold text-secondary grid grid-cols-4 grid-flow-row gap-x-0.5'
-					>
-						<div class='absolute -right-8 -top-6 text-5xl'>T</div>
-						{'IDCTCOEF'.split('').map((c) => <div>{c}</div>)}
-					</div>
-					<div class='font-mono text-secondary text-6xl font-black'>
-						⋅
-					</div>
-					<Arrow />
-					<div class='font-mono text-secondary text-6xl font-black'>
-						⋅
-					</div>
-					<Matrix text='IDCTCOEF' />
+					T
 				</div>
 			</div>
+			<div class='font-mono text-secondary text-6xl font-black'>⋅</div>
+			<Arrow />
+			<div class='font-mono text-secondary text-6xl font-black'>⋅</div>
+			<MiniMatrix text='IDCTCOEF' />
 		</SectionHeader>
 		<Section subtext={progress('Decompressing', 6, 10)}>
 			<Image class='bg-gray-500' src='chunk/chunk_idct.png' />
 		</Section>
 
 		<!--! Block Merging -->
-		<SectionHeader title='Block Merging' />
+		<SectionHeader title='Block Merging' class='justify-evenly'>
+			<Stream class='rotate-[60deg] origin-top' />
+			<Stream class='-rotate-[60deg] origin-top' />
+		</SectionHeader>
 		<Section
 			text={[
 				'Merging of the streams of 8x8 chunks into their respective channel, with dimensions of the original subsampled channels.',
@@ -481,12 +463,10 @@ const progress = (task: string, progress: number, total: number) => {
 		</Section>
 
 		<!--! Upsampling -->
-		<SectionHeader title='Upsampling'>
-			<div class='flex flex-row justify-around flex-1'>
-				<Arrow />
-				<Arrow />
-				<Arrow />
-			</div>
+		<SectionHeader title='Upsampling' class='justify-around'>
+			<Arrow />
+			<Arrow />
+			<Arrow />
 		</SectionHeader>
 		<Section
 			text={[
@@ -506,20 +486,21 @@ const progress = (task: string, progress: number, total: number) => {
 		</Section>
 
 		<!--! Color Space Transformation -->
-		<SectionHeader title='Color Space Transformation (RGB)'>
-			<div class='flex flex-row justify-evenly flex-1'>
-				<Arrow />
-				<div class='relative'>
-					<Arrow class='absolute rotate-45' />
-					<Arrow class='-rotate-45' />
-				</div>
-				<Arrow />
-				<div class='relative'>
-					<Arrow class='absolute rotate-45' />
-					<Arrow class='-rotate-45' />
-				</div>
-				<Arrow />
+		<SectionHeader
+			title='Color Space Transformation (RGB)'
+			class='justify-evenly'
+		>
+			<Arrow />
+			<div class='relative'>
+				<Arrow class='absolute rotate-45' />
+				<Arrow class='-rotate-45' />
 			</div>
+			<Arrow />
+			<div class='relative'>
+				<Arrow class='absolute rotate-45' />
+				<Arrow class='-rotate-45' />
+			</div>
+			<Arrow />
 		</SectionHeader>
 		<Section
 			text={[
@@ -537,12 +518,13 @@ const progress = (task: string, progress: number, total: number) => {
 		</Section>
 
 		<!--! Joining -->
-		<SectionHeader title='R, G, B Channel Joining '>
-			<div class='flex flex-row justify-evenly flex-1'>
-				<Arrow class='-rotate-45' />
-				<Arrow />
-				<Arrow class='rotate-45' />
-			</div>
+		<SectionHeader
+			title='R, G, B Channel Joining '
+			class='flex flex-row justify-evenly'
+		>
+			<Arrow class='-rotate-45' />
+			<Arrow />
+			<Arrow class='rotate-45' />
 		</SectionHeader>
 		<Section
 			text={['Joining the R, G, B channels to form the final image.']}
@@ -552,9 +534,132 @@ const progress = (task: string, progress: number, total: number) => {
 		</Section>
 	</Chapter>
 
-	<!--? Observations -->
+	<!--? DCT Math -->
+	<Chapter title='Discrete Cosine Transform' class='bg-retro-2'>
+		<!--? Frequencies -->
+		<SectionHeader title='Frequency Decomposition' />
+		<div class='flex justify-evenly items-center'>
+			<Frequencies />
+			<div class='flex gap-4 items-center'>
+				<FrequencyCoef frequency={0} />
+				<PlusIcon class='w-16 h-16' />
+				<FrequencyCoef frequency={1} />
+				<PlusIcon class='w-16 h-16' />
+				<Dots />
+				<PlusIcon class='w-16 h-16' />
+				<FrequencyCoef frequency={7} />
+			</div>
+		</div>
+
+		<SectionHeader title='Cosine Wave Sampling' />
+		<Section
+			text={[
+				"Splitting the cosine wave into 8 equal parts, and sampling the wave at each part's midpoint",
+				'',
+				'yn = cos((2n + 1)π/16)',
+				'',
+				'n ∈ [0, 7]',
+			]}
+		>
+			<div
+				class='max-w-2xl w-full border-8 border-secondary rounded-3xl relative flex justify-center items-center'
+			>
+				<div
+					class='absolute text-secondary font-bold text-3xl font-mono grid grid-cols-8 gap-y-4 w-full'
+				>
+					<div class='col-span-4'></div>
+					<Fraction numerator='9π' denominator='16' />
+					<Fraction numerator='11π' denominator='16' />
+					<Fraction numerator='13π' denominator='16' />
+					<Fraction numerator='15π' denominator='16' />
+					<Fraction numerator='π' denominator='16' />
+					<Fraction numerator='3π' denominator='16' />
+					<Fraction numerator='5π' denominator='16' />
+					<Fraction numerator='7π' denominator='16' />
+				</div>
+				<CosineIcon
+					frequency={1}
+					points={[0.98, 0.83, 0.56, 0.2, -0.2, -0.56, -0.83, -0.98]}
+					class='w-full'
+					viewBox={[200, 100]}
+				/>
+			</div>
+		</Section>
+
+		<SectionHeader title='DCT Coefficients' />
+		<div class='flex flex-col items-center gap-8'>
+			<div
+				class='grid grid-rows-4 grid-flow-col items-center gap-y-4 gap-x-16'
+			>
+				<CosWave frequency={0} points={[1, 1, 1, 1, 1, 1, 1, 1]} />
+				<CosWave
+					frequency={1}
+					points={[0.98, 0.83, 0.56, 0.2, -0.2, -0.56, -0.83, -0.98]}
+				/>
+				<CosWave
+					frequency={2}
+					points={[
+						0.92, 0.38, -0.38, -0.92, -0.92, -0.38, 0.38, 0.92,
+					]}
+				/>
+				<CosWave
+					frequency={3}
+					points={[0.83, -0.2, -0.98, -0.56, 0.56, 0.98, 0.2, -0.83]}
+				/>
+				<CosWave
+					frequency={4}
+					points={[
+						0.71, -0.71, -0.71, 0.71, 0.71, -0.71, -0.71, 0.71,
+					]}
+				/>
+				<CosWave
+					frequency={5}
+					points={[0.56, -0.98, 0.2, 0.83, -0.83, -0.2, 0.98, -0.56]}
+				/>
+				<CosWave
+					frequency={6}
+					points={[
+						0.38, -0.92, 0.92, -0.38, -0.38, 0.92, -0.92, 0.38,
+					]}
+				/>
+				<CosWave
+					frequency={7}
+					points={[0.2, -0.56, 0.83, -0.98, 0.98, -0.83, 0.56, -0.2]}
+				/>
+			</div>
+			<div></div>
+		</div>
+		<Section text={[]}>
+			<div class='flex items-center gap-4'>
+				<p class='text-8xl font-mono font-bold text-secondary'>
+					X<sub>k</sub>
+				</p>
+				<p class='text-8xl font-mono font-bold text-secondary'>=</p>
+				<Vector letter='c' vals={[0, 1, 2, 3, 4, 5, 6, 7]} transposed />
+				<p class='text-8xl font-mono font-bold text-secondary'>∘</p>
+				<Vector letter='x' vals={[0, 1, 2, 3, 4, 5, 6, 7]} />
+			</div>
+		</Section>
+
+		<!--? DCT Coefficients -->
+		<SectionHeader title='DCT Coefficients' />
+		<div class='flex justify-evenly'>
+			<DctCoefs />
+			<div class='flex items-center gap-8'>
+				<Vector letter='X' vals={[0, 1, 2, 3, 4, 5, 6, 7]} />
+				<p class='text-8xl font-mono font-bold text-secondary'>=</p>
+				<Matrix letter='c' vals={[0, 1, 2, 3, 4, 5, 6, 7]} />
+				<div class='font-mono text-secondary text-6xl font-black'>
+					⋅
+				</div>
+				<Vector letter='x' vals={[0, 1, 2, 3, 4, 5, 6, 7]} />
+			</div>
+		</div>
+	</Chapter>
+
+	<!--! Observations -->
 	<Chapter title='Observations' class='bg-retro-2'>
-		<!--? Compression-Decompression -->
+		<!--! Compression-Decompression -->
 		<SectionHeader title='Compression-Decompression' />
 		<div class='flex flex-row gap-16 justify-center items-center'>
 			<Image class='bg-secondary w-1/5 h-1/5' src='anime.png' />
@@ -562,35 +667,37 @@ const progress = (task: string, progress: number, total: number) => {
 			<Image class='bg-secondary w-1/5 h-1/5' src='decompressed.png' />
 		</div>
 
-		<!--? Multiple Compression Rounds -->
+		<!--! Multiple Compression Rounds -->
 		<SectionHeader title='Multiple Compression Rounds' />
 		<div class='flex flex-row gap-16 justify-center items-center'>
 			<Image class='bg-secondary' src='anime.png' />
 			<Arrow class='-rotate-90' />
 			<Image class='bg-secondary' src='decompressed.png' />
 			<Arrow class='-rotate-90' />
-			<div class='flex gap-4'>
-				<div class='rounded-full bg-secondary w-6 h-6'></div>
-				<div class='rounded-full bg-secondary w-6 h-6'></div>
-				<div class='rounded-full bg-secondary w-6 h-6'></div>
-			</div>
+			<Dots />
 			<Arrow class='-rotate-90' />
 			<Image class='bg-secondary' src='multiple.png' />
 		</div>
 
-		<!--? Different Subsampling -->
+		<!--! Chroma vs Luma Subsampling -->
+		<SectionHeader title='Chroma vs Luma Subsampling' />
+		<div class='flex flex-col justify-center items-center gap-4'>
+			<Sampling src='subsample/420' name='Chroma Subsampling' />
+			<Sampling src='subsample/y-subsample' name='Luma Subsampling' />
+		</div>
+
+		<!--! Different Subsampling -->
 		<SectionHeader title='Different Subsampling' />
-		<div class='flex flex-col justify-center items-center gap-6'>
+		<div class='flex flex-col justify-center items-center gap-4'>
 			<Sampling src='subsample/original' name='No Chroma Subsampling' />
 			<Sampling src='subsample/422' name='4:2:2 Chroma Subsampling' />
 			<Sampling src='subsample/420' name='4:2:0 Chroma Subsampling' />
 			<Sampling src='subsample/411' name='4:1:1 Chroma Subsampling' />
-			<Sampling src='subsample/y-subsample' name='4:2:0 Y Subsampling' />
 		</div>
 
-		<!--? Different Downsampling -->
+		<!--! Different Downsampling -->
 		<SectionHeader title='Different Downsampling' />
-		<div class='flex flex-col justify-center items-center gap-6'>
+		<div class='flex flex-col justify-center items-center gap-4'>
 			<Sampling src='downsample/original' name='No Chroma Downsampling' />
 			<Sampling
 				src='downsample/average'
@@ -598,11 +705,11 @@ const progress = (task: string, progress: number, total: number) => {
 			/>
 		</div>
 
-		<!--? Compression-Decompression -->
+		<!--! Compression-Decompression -->
 		<SectionHeader title='Lossy Compression' />
 		<Quantization src='chunk/chunk' />
 
-		<!--? Different Quantization Tables -->
+		<!--! Different Quantization Tables -->
 		<SectionHeader title='Different Quantization Tables' />
 		<div class='flex flex-col justify-center items-center gap-6'>
 			<div class='flex flex-row gap-16 items-center'>

@@ -1,10 +1,11 @@
 ---
 interface Props {
 	title: string;
+	class?: string;
 	children?: any;
 }
 
-const { title } = Astro.props;
+const { title, class: className = '' } = Astro.props;
 
 const kebabCaseTitle = title
 	.replace(/[^\w\s]/g, '')
@@ -15,7 +16,7 @@ const kebabCaseTitle = title
 
 <div data-section id={kebabCaseTitle} class='flex flex-row pb-8 pt-14'>
 	<div class='flex-1 relative'>
-		<div class='absolute w-full -top-6'>
+		<div class={`absolute w-full -top-6 flex flex-row ${className}`}>
 			<slot />
 		</div>
 	</div>
