@@ -4,7 +4,8 @@
 ## Balgradean Andrei
 
 Project link: [GitHub](https://github.com/ThotuB/jpeg)
-Site link: [GitHub Pages](https://thotub.github.io/jpeg/) (*Might not work yet*)
+
+Site link: [GitHub Pages](https://thotub.github.io/jpeg/) (**Might not work yet**)
 
 ## 🚀 Project Structure
 
