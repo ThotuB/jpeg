@@ -1,6 +1,12 @@
 ---
 import Vector from './Vector.astro';
 
+interface Props {
+	transposed?: boolean;
+}
+
+const { transposed } = Astro.props;
+
 const dctCoefs = [
 	[1, 1, 1, 1, 1, 1, 1, 1],
 	[0.98, 0.83, 0.56, 0.2, -0.2, -0.56, -0.83, -0.98],
@@ -11,17 +17,33 @@ const dctCoefs = [
 	[0.38, -0.92, 0.92, -0.38, -0.38, 0.92, -0.92, 0.38],
 	[0.2, -0.56, 0.83, -0.98, 0.98, -0.83, 0.56, -0.2],
 ];
+
+const dctCoefsTransposed = [
+	[1, 0.98, 0.92, 0.83, 0.71, 0.56, 0.38, 0.2],
+	[1, 0.83, 0.38, -0.2, -0.71, -0.98, -0.92, -0.56],
+	[1, 0.56, -0.38, -0.98, -0.71, 0.2, 0.92, 0.83],
+	[1, 0.2, -0.92, -0.56, 0.71, 0.83, -0.38, -0.98],
+	[1, -0.2, -0.92, 0.56, 0.71, -0.83, -0.38, 0.98],
+	[1, -0.56, -0.38, 0.98, -0.71, -0.2, 0.92, -0.83],
+	[1, -0.83, 0.38, 0.2, -0.71, 0.98, -0.92, 0.56],
+	[1, -0.98, 0.92, -0.83, 0.71, -0.56, 0.38, -0.2],
+];
+
+const coefs = transposed ? dctCoefsTransposed : dctCoefs;
+const yLetter = transposed ? 's' : 'f';
+const xLetter = transposed ? 'f' : 's';
 ---
 
-<div id='grid-coefs' class='gap-4'>
-	<div></div>
-	<Vector letter='s' vals={[0, 1, 2, 3, 4, 5, 6, 7]} transposed />
-	<Vector letter='f' vals={[0, 1, 2, 3, 4, 5, 6, 7]} />
+<div class='relative flex gap-4'>
+	<div class='absolute -top-20 right-0'>
+		<Vector letter={xLetter} vals={[0, 1, 2, 3, 4, 5, 6, 7]} transposed />
+	</div>
+	<Vector letter={yLetter} vals={[0, 1, 2, 3, 4, 5, 6, 7]} />
 	<div
 		class='grid grid-cols-8 border-2 border-secondary rounded-2xl overflow-hidden'
 	>
 		{
-			dctCoefs.flat().map((coef, _) => (
+			coefs.flat().map((coef, _) => (
 				<div
 					class='border-2 border-secondary w-16 h-16'
 					style={{
@@ -32,11 +54,3 @@ const dctCoefs = [
 		}
 	</div>
 </div>
-
-<style>
-	#grid-coefs {
-		display: grid;
-		grid-template-columns: auto auto;
-		grid-auto-flow: row;
-	}
-</style>

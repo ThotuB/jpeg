@@ -551,6 +551,25 @@ const progress = (task: string, progress: number, total: number) => {
 			</div>
 		</div>
 
+		<!--? Frequency Component -->
+		<SectionHeader title='Frequency Component' />
+		<Section
+			text={[
+				"The dot product of the input vector and a wave's coefficients measures the similarity between the two vectors, resulting in a frequency component.",
+			]}
+		>
+			<div class='flex items-center gap-4'>
+				<p class='text-8xl font-mono font-bold text-secondary'>
+					X<sub>k</sub>
+				</p>
+				<p class='text-8xl font-mono font-bold text-secondary'>=</p>
+				<Vector letter='c' vals={[0, 1, 2, 3, 4, 5, 6, 7]} transposed />
+				<p class='text-8xl font-mono font-bold text-secondary'>∘</p>
+				<Vector letter='x' vals={[0, 1, 2, 3, 4, 5, 6, 7]} />
+			</div>
+		</Section>
+
+		<!--? Cosine Wave Sampling -->
 		<SectionHeader title='Cosine Wave Sampling' />
 		<Section
 			text={[
@@ -559,6 +578,10 @@ const progress = (task: string, progress: number, total: number) => {
 				'yn = cos((2n + 1)π/16)',
 				'',
 				'n ∈ [0, 7]',
+				'',
+				'Sampling of all 8 cosine waves at each of the 8 points gives us 64 coefficients.',
+				'',
+				"* Doesn't include normalization",
 			]}
 		>
 			<div
@@ -586,74 +609,83 @@ const progress = (task: string, progress: number, total: number) => {
 			</div>
 		</Section>
 
-		<SectionHeader title='DCT Coefficients' />
-		<div class='flex flex-col items-center gap-8'>
-			<div
-				class='grid grid-rows-4 grid-flow-col items-center gap-y-4 gap-x-16'
-			>
-				<CosWave frequency={0} points={[1, 1, 1, 1, 1, 1, 1, 1]} />
-				<CosWave
-					frequency={1}
-					points={[0.98, 0.83, 0.56, 0.2, -0.2, -0.56, -0.83, -0.98]}
-				/>
-				<CosWave
-					frequency={2}
-					points={[
-						0.92, 0.38, -0.38, -0.92, -0.92, -0.38, 0.38, 0.92,
-					]}
-				/>
-				<CosWave
-					frequency={3}
-					points={[0.83, -0.2, -0.98, -0.56, 0.56, 0.98, 0.2, -0.83]}
-				/>
-				<CosWave
-					frequency={4}
-					points={[
-						0.71, -0.71, -0.71, 0.71, 0.71, -0.71, -0.71, 0.71,
-					]}
-				/>
-				<CosWave
-					frequency={5}
-					points={[0.56, -0.98, 0.2, 0.83, -0.83, -0.2, 0.98, -0.56]}
-				/>
-				<CosWave
-					frequency={6}
-					points={[
-						0.38, -0.92, 0.92, -0.38, -0.38, 0.92, -0.92, 0.38,
-					]}
-				/>
-				<CosWave
-					frequency={7}
-					points={[0.2, -0.56, 0.83, -0.98, 0.98, -0.83, 0.56, -0.2]}
-				/>
-			</div>
-			<div></div>
-		</div>
-		<Section text={[]}>
-			<div class='flex items-center gap-4'>
-				<p class='text-8xl font-mono font-bold text-secondary'>
-					X<sub>k</sub>
-				</p>
-				<p class='text-8xl font-mono font-bold text-secondary'>=</p>
-				<Vector letter='c' vals={[0, 1, 2, 3, 4, 5, 6, 7]} transposed />
-				<p class='text-8xl font-mono font-bold text-secondary'>∘</p>
-				<Vector letter='x' vals={[0, 1, 2, 3, 4, 5, 6, 7]} />
-			</div>
-		</Section>
-
 		<!--? DCT Coefficients -->
 		<SectionHeader title='DCT Coefficients' />
-		<div class='flex justify-evenly'>
-			<DctCoefs />
-			<div class='flex items-center gap-8'>
+		<div
+			class='grid grid-rows-4 grid-flow-col items-center gap-y-4 gap-x-16'
+		>
+			<CosWave frequency={0} points={[1, 1, 1, 1, 1, 1, 1, 1]} />
+			<CosWave
+				frequency={1}
+				points={[0.98, 0.83, 0.56, 0.2, -0.2, -0.56, -0.83, -0.98]}
+			/>
+			<CosWave
+				frequency={2}
+				points={[0.92, 0.38, -0.38, -0.92, -0.92, -0.38, 0.38, 0.92]}
+			/>
+			<CosWave
+				frequency={3}
+				points={[0.83, -0.2, -0.98, -0.56, 0.56, 0.98, 0.2, -0.83]}
+			/>
+			<CosWave
+				frequency={4}
+				points={[0.71, -0.71, -0.71, 0.71, 0.71, -0.71, -0.71, 0.71]}
+			/>
+			<CosWave
+				frequency={5}
+				points={[0.56, -0.98, 0.2, 0.83, -0.83, -0.2, 0.98, -0.56]}
+			/>
+			<CosWave
+				frequency={6}
+				points={[0.38, -0.92, 0.92, -0.38, -0.38, 0.92, -0.92, 0.38]}
+			/>
+			<CosWave
+				frequency={7}
+				points={[0.2, -0.56, 0.83, -0.98, 0.98, -0.83, 0.56, -0.2]}
+			/>
+		</div>
+
+		<!--? DCT Coefficients -->
+		<SectionHeader title='DCT Coefficients - Matrix-Vector Product' />
+		<Section
+			text={[
+				"The DCT coefficient matrix is made by stacking the cosine waves' sampled points.",
+				'The matrix is multiplied by the input vector, so each frequency vector is multiplied by the input vector.',
+				'',
+				'* Matrix multiplication is a more general form of the dot product',
+				'',
+				'',
+				'For a 8x8 chunk of the image, we pass the rows through the DCT matrix, and then the columns.',
+				'It is equivalent to multiplying the coefficient matrix to the input chunk, and them multiplying the result by the transpose of the coefficient matrix.',
+			]}
+		>
+			<div class='flex items-center justify-center mt-20 gap-8'>
 				<Vector letter='X' vals={[0, 1, 2, 3, 4, 5, 6, 7]} />
 				<p class='text-8xl font-mono font-bold text-secondary'>=</p>
-				<Matrix letter='c' vals={[0, 1, 2, 3, 4, 5, 6, 7]} />
+				<DctCoefs />
 				<div class='font-mono text-secondary text-6xl font-black'>
 					⋅
 				</div>
 				<Vector letter='x' vals={[0, 1, 2, 3, 4, 5, 6, 7]} />
 			</div>
+		</Section>
+
+		<!--? DCT Coefficients -->
+		<SectionHeader title='DCT-2D - Matrix Multiplication' />
+		<div class='flex items-center justify-center mt-20 gap-8'>
+			<Image
+				src='chunk/chunk_dct.png'
+				class='bg-gray-300 max-w-sm w-full p-6'
+			/>
+			<p class='text-8xl font-mono font-bold text-secondary'>=</p>
+			<DctCoefs />
+			<div class='font-mono text-secondary text-6xl font-black'>⋅</div>
+			<Image
+				src='chunk/chunk.png'
+				class='bg-gray-300 max-w-sm w-full p-6'
+			/>
+			<div class='font-mono text-secondary text-6xl font-black'>⋅</div>
+			<DctCoefs transposed />
 		</div>
 	</Chapter>
 
