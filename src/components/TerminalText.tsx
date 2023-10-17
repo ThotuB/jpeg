@@ -19,7 +19,14 @@ export default function TerminalText({ text: finalText }: Props) {
 	type(0);
 
 	return (
-		<>
+		<div class="relative">
+			<div class="absolute">
+				{finalText.map((line, i) => (
+					<p>
+						$ {line}
+					</p>
+				))}
+			</div>
 			{text().split('\n').map((line, i) => (
 				<p>
 					$ {line}
@@ -30,10 +37,7 @@ export default function TerminalText({ text: finalText }: Props) {
 					)}
 				</p>
 			))}
-			{Array.from({ length: finalText.length - text().split('\n').length }).map(() => (
-				<p>&nbsp;</p>
-			))}
-		</>
+		</div>
 	);
 }
 
