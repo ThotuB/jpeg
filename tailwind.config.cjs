@@ -34,6 +34,13 @@ module.exports = {
 			},
 			fontFamily: {
 				bit: ['RuneScape UF', 'Helvetica']
+			},
+			screens: {
+				'mxs': { 'max': '639px' },
+				'msm': { 'max': '767px' },
+				'mmd': { 'max': '1023px' },
+				'mlg': { 'max': '1279px' },
+				'mxl': { 'max': '1535px' },
 			}
 		},
 	},

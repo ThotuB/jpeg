@@ -21,22 +21,24 @@ export default function TerminalText({ text: finalText }: Props) {
 	return (
 		<div class="relative">
 			<div class="absolute">
+				{text().split('\n').map((line, i) => (
+					<p>
+						$ {line}
+						{i === text().split('\n').length - 1 && (
+							<span class='animate-terminal'>
+								█
+							</span>
+						)}
+					</p>
+				))}
+			</div>
+			<div class='invisible'>
 				{finalText.map((line, i) => (
 					<p>
 						$ {line}
 					</p>
 				))}
 			</div>
-			{text().split('\n').map((line, i) => (
-				<p>
-					$ {line}
-					{i === text().split('\n').length - 1 && (
-						<span class='animate-terminal'>
-							█
-						</span>
-					)}
-				</p>
-			))}
 		</div>
 	);
 }
