@@ -9,127 +9,127 @@
 @tailwind utilities;
 
 @layer base {
-  [data-theme="pink-purple"] {
-    --color-primary: hsl(249, 23%, 12%);
-    --color-secondary: hsl(330, 29%, 73%);
-    --color-retro-1: hsl(312, 34%, 58%);
-    --color-retro-2: hsl(299, 41%, 53%);
-    --color-retro-3: hsl(268, 55%, 52%);
-    --color-retro-4: hsl(239, 45%, 44%);
-    --color-retro-5: hsl(227, 53%, 32%);
-    --color-retro-6: hsl(228, 51%, 25%);
-    --color-retro-7: hsl(161, 100%, 43%);
+	[data-theme='pink-purple'] {
+		--color-primary: hsl(249, 23%, 12%);
+		--color-secondary: hsl(330, 29%, 73%);
+		--color-retro-1: hsl(312, 34%, 58%);
+		--color-retro-2: hsl(299, 41%, 53%);
+		--color-retro-3: hsl(268, 55%, 52%);
+		--color-retro-4: hsl(239, 45%, 44%);
+		--color-retro-5: hsl(227, 53%, 32%);
+		--color-retro-6: hsl(228, 51%, 25%);
+		--color-retro-7: hsl(161, 100%, 43%);
 
-    /* for color lerping  */
-    --h-primary: 249;
-    --s-primary: 23%;
-    --l-primary: 12%;
+		/* for color lerping  */
+		--h-primary: 249;
+		--s-primary: 23%;
+		--l-primary: 12%;
 
-    --h-secondary: 330;
-    --s-secondary: 29%;
-    --l-secondary: 73%;
-  }
+		--h-secondary: 330;
+		--s-secondary: 29%;
+		--l-secondary: 73%;
+	}
 
-  [data-theme="yellow-purple"] {
-    --color-primary: hsl(262, 27%, 12%);
-    --color-secondary: hsl(65, 95%, 80%);
-    --color-retro-1: hsl(60, 100%, 50%);
-    --color-retro-2: hsl(47, 99%, 61%);
-    --color-retro-3: hsl(31, 100%, 65%);
-    --color-retro-4: hsl(287, 54%, 56%);
-    --color-retro-5: hsl(277, 66%, 41%);
-    --color-retro-6: hsl(251, 66%, 32%);
-    --color-retro-7: hsl(161, 100%, 43%);
+	[data-theme='yellow-purple'] {
+		--color-primary: hsl(262, 27%, 12%);
+		--color-secondary: hsl(65, 95%, 80%);
+		--color-retro-1: hsl(60, 100%, 50%);
+		--color-retro-2: hsl(47, 99%, 61%);
+		--color-retro-3: hsl(31, 100%, 65%);
+		--color-retro-4: hsl(287, 54%, 56%);
+		--color-retro-5: hsl(277, 66%, 41%);
+		--color-retro-6: hsl(251, 66%, 32%);
+		--color-retro-7: hsl(161, 100%, 43%);
 
-    /* for color lerping  */
-    --h-primary: 262;
-    --s-primary: 27%;
-    --l-primary: 12%;
-    --h-secondary: 65;
-    --s-secondary: 95%;
-    --l-secondary: 80%;
-  }
+		/* for color lerping  */
+		--h-primary: 262;
+		--s-primary: 27%;
+		--l-primary: 12%;
+		--h-secondary: 65;
+		--s-secondary: 95%;
+		--l-secondary: 80%;
+	}
 
-  [data-theme="orange-green"] {
-    --color-primary: hsl(215, 27%, 12%);
-    --color-secondary: hsl(12, 70%, 73%);
-    --color-retro-1: hsl(14, 68%, 54%);
-    --color-retro-2: hsl(28, 85%, 62%);
-    --color-retro-3: hsl(34, 94%, 82%);
-    --color-retro-4: hsl(172, 21%, 57%);
-    --color-retro-5: hsl(186, 50%, 40%);
-    --color-retro-6: hsl(206, 60%, 27%);
-    --color-retro-7: hsl(161, 100%, 43%);
+	[data-theme='orange-green'] {
+		--color-primary: hsl(215, 27%, 12%);
+		--color-secondary: hsl(12, 70%, 73%);
+		--color-retro-1: hsl(14, 68%, 54%);
+		--color-retro-2: hsl(28, 85%, 62%);
+		--color-retro-3: hsl(34, 94%, 82%);
+		--color-retro-4: hsl(172, 21%, 57%);
+		--color-retro-5: hsl(186, 50%, 40%);
+		--color-retro-6: hsl(206, 60%, 27%);
+		--color-retro-7: hsl(161, 100%, 43%);
 
-    /* for color lerping  */
-    --h-primary: 215;
-    --s-primary: 27%;
-    --l-primary: 12%;
-    --h-secondary: 12;
-    --s-secondary: 70%;
-    --l-secondary: 73%;
-  }
+		/* for color lerping  */
+		--h-primary: 215;
+		--s-primary: 27%;
+		--l-primary: 12%;
+		--h-secondary: 12;
+		--s-secondary: 70%;
+		--l-secondary: 73%;
+	}
 
-  [data-theme="white-black"] {
-    --color-primary: hsl(225, 18%, 10%);
-    --color-secondary: hsl(225, 18%, 98%);
-    --color-retro-1: hsl(225, 18%, 85%);
-    --color-retro-2: hsl(225, 18%, 60%);
-    --color-retro-3: hsl(225, 18%, 40%);
-    --color-retro-4: hsl(225, 18%, 28%);
-    --color-retro-5: hsl(225, 18%, 20%);
-    --color-retro-6: hsl(225, 18%, 14%);
-    --color-retro-7: hsl(225, 18%, 50%);
+	[data-theme='white-black'] {
+		--color-primary: hsl(225, 18%, 10%);
+		--color-secondary: hsl(225, 18%, 98%);
+		--color-retro-1: hsl(225, 18%, 85%);
+		--color-retro-2: hsl(225, 18%, 60%);
+		--color-retro-3: hsl(225, 18%, 40%);
+		--color-retro-4: hsl(225, 18%, 28%);
+		--color-retro-5: hsl(225, 18%, 20%);
+		--color-retro-6: hsl(225, 18%, 14%);
+		--color-retro-7: hsl(225, 18%, 50%);
 
-    /* for color lerping  */
-    --h-primary: 225;
-    --s-primary: 18%;
-    --l-primary: 10%;
-    --h-secondary: 225;
-    --s-secondary: 18%;
-    --l-secondary: 98%;
-  }
+		/* for color lerping  */
+		--h-primary: 225;
+		--s-primary: 18%;
+		--l-primary: 10%;
+		--h-secondary: 225;
+		--s-secondary: 18%;
+		--l-secondary: 98%;
+	}
 }
 
 @layer components {
-  .pixelated {
-    image-rendering: pixelated;
-  }
+	.pixelated {
+		image-rendering: pixelated;
+	}
 }
 
 @font-face {
-  font-family: 'RuneScape UF';
-  src: url('/fonts/runescape_uf.ttf') format("ttf");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+	font-family: 'RuneScape UF';
+	src: url('/fonts/runescape_uf.ttf') format('ttf');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
-  font-family: 'Paskowy';
-  src: url('/fonts/Paskowy.ttf') format("ttf");
+	font-family: 'Paskowy';
+	src: url('/fonts/Paskowy.ttf') format('ttf');
 }
 
 */ * {
-  font-family: 'RuneScape UF', sans-serif;
+	font-family: 'RuneScape UF', sans-serif;
 }
 
 ::selection {
-  background-color: var(--color-retro-7);
-  color: var(--color-primary);
+	background-color: var(--color-retro-7);
+	color: var(--color-primary);
 }
 
 .scrollbar::-webkit-scrollbar {
-  width: 20px;
+	width: 20px;
 }
 
 .scrollbar::-webkit-scrollbar-track {
-  background-color: theme('colors.secondary');
+	background-color: theme('colors.secondary');
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
-  background-color: theme('colors.primary');
-  border: 4px solid theme('colors.secondary');
+	background-color: theme('colors.primary');
+	border: 4px solid theme('colors.secondary');
 }
 
 /* .scrollbar::-webkit-scrollbar-thumb:hover {
