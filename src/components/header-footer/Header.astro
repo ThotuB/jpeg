@@ -1,24 +1,24 @@
 ---
-import RetroV from './RetroV.astro';
-import ThemeSelect from 'components/theme/ThemeSelect.tsx';
+import RetroV from './RetroV.astro'
+import ThemeSelect from 'components/theme/ThemeSelect.tsx'
 ---
 
 <header>
-	<div class='relative'>
+	<div class="relative">
 		<ThemeSelect client:load client:only />
-		<div class='bg-secondary flex flex-row justify-center py-12'>
-			<div class='relative text-6xl font-bold'>
-				<h1 class='absolute text-primary z-20'>JPEG</h1>
-				<h1 class='text-transparent'>JPEG</h1>
+		<div class="flex flex-row justify-center bg-secondary py-6">
+			<div class="relative text-5xl font-bold">
+				<h1 class="absolute z-20 text-primary">JPEG</h1>
+				<h1 class="text-transparent">JPEG</h1>
 			</div>
 		</div>
-		<div class='-mt-6 mb-12'>
-			<RetroV color='bg-retro-1' />
-			<RetroV color='bg-retro-2' />
-			<RetroV color='bg-retro-3' />
-			<RetroV color='bg-retro-4' />
-			<RetroV color='bg-retro-5' />
-			<RetroV color='bg-retro-6' />
+		<div class="-mt-6 mb-12">
+			<RetroV color="bg-retro-1" />
+			<RetroV color="bg-retro-2" />
+			<RetroV color="bg-retro-3" />
+			<RetroV color="bg-retro-4" />
+			<RetroV color="bg-retro-5" />
+			<RetroV color="bg-retro-6" />
 		</div>
 	</div>
 </header>

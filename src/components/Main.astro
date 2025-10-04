@@ -8,6 +8,7 @@ import Sampling from 'components/Sampling.astro';
 import Section from 'components/Section.astro';
 import SectionHeader from 'components/SectionHeader.astro';
 import Arrow from 'components/shapes/Arrow.astro';
+import ArrowFromTo from 'components/shapes/ArrowFromTo.astro';
 import EntropyIcon from 'components/svgs/EntropyIcon.astro';
 import HuffmanIcon from 'components/svgs/HuffmanIcon.astro';
 import { QUANTUMS_10, QUANTUMS_50, QUANTUMS_90 } from '../consts';
@@ -31,7 +32,7 @@ const progress = (task: string, progress: number, total: number) => {
 
 <main class='flex flex-col'>
 	<div class='flex flex-row items-center justify-center px-6'>
-		<Image class='bg-secondary w-96 p-4 rounded-3xl' src='anime.png' />
+		<Image class='bg-secondary w-48 p-2 rounded-2xl' src='anime.png' />
 	</div>
 
 	<!--? COMPRESSION -->
@@ -42,7 +43,7 @@ const progress = (task: string, progress: number, total: number) => {
 			text={['The given image^C', '']}
 			subtext='Starting compression...'
 		>
-			<Image class='bg-secondary' src='anime.png' />
+			<Image class='bg-secondary' src='anime.png' id='uncompressed' />
 			<div slot='right' class='text-retro-3'>
 				$ Starting compression...
 			</div>
@@ -50,9 +51,6 @@ const progress = (task: string, progress: number, total: number) => {
 
 		<!--? RGB -->
 		<SectionHeader title='R, G, B Channel Splitting' class='justify-evenly'>
-			<Arrow class='rotate-45' />
-			<Arrow />
-			<Arrow class='-rotate-45' />
 		</SectionHeader>
 		<Section
 			text={[
@@ -62,27 +60,18 @@ const progress = (task: string, progress: number, total: number) => {
 			]}
 			subtext={progress('Compressing', 1, 10)}
 		>
-			<Image class='bg-red-500' src='compression/rgb_r.png' />
-			<Image class='bg-green-500' src='compression/rgb_g.png' />
-			<Image class='bg-blue-500' src='compression/rgb_b.png' />
+			<Image class='bg-red-500' src='compression/rgb_r.png' id="r" />
+			<Image class='bg-green-500' src='compression/rgb_g.png' id="g" />
+			<Image class='bg-blue-500' src='compression/rgb_b.png' id="b" />
 		</Section>
+
+		<ArrowFromTo fromId='uncompressed' toId='r' />
 
 		<!--? Color Space Transformation -->
 		<SectionHeader
 			title='Color Space Transformation (YCbCr)'
 			class='justify-evenly'
 		>
-			<Arrow />
-			<div class='relative'>
-				<Arrow class='absolute rotate-45' />
-				<Arrow class='-rotate-45' />
-			</div>
-			<Arrow />
-			<div class='relative'>
-				<Arrow class='absolute rotate-45' />
-				<Arrow class='-rotate-45' />
-			</div>
-			<Arrow />
 		</SectionHeader>
 		<Section
 			text={[

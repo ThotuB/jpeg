@@ -1,0 +1,19 @@
+---
+interface Props {
+	fromId: string
+	toId: string
+}
+
+const { fromId, toId } = Astro.props
+---
+
+<div>
+	<h1>From {fromId}</h1>
+	<h1>To {toId}</h1>
+</div>
+<script>
+	const from = document.getElementById('{{fromId}}')
+	const to = document.getElementById('{{toId}}')
+
+	console.log(from, to)
+</script>

@@ -1,37 +1,31 @@
 ---
 interface Props {
-	src: string;
-	class: string;
+	src: string
+	class: string
+	id?: string
 }
 
-const { src, class: className } = Astro.props as Props;
+const { src, class: className, id } = Astro.props as Props
 ---
 
-<button
-	class={`${className} p-2 rounded-2xl w-64 aspect-square mxs:w-48`}
-	data-zoom-button
->
-	<img
-		class='pixelated rounded-xl h-full select-none'
-		src={src}
-		alt='image'
-	/>
+<button id={id} class={`${className} p-2 rounded-2xl w-48 aspect-square mxs:w-48`} data-zoom-button>
+	<img class="pixelated h-full select-none rounded-xl" src={src} alt="image" />
 </button>
 
 <script>
-	const buttons = document.querySelectorAll('[data-zoom-button]');
-	const modal = document.querySelector('#modal-img') as HTMLElement;
-	const modalImg = modal.querySelector('img') as HTMLImageElement;
+	const buttons = document.querySelectorAll('[data-zoom-button]')
+	const modal = document.querySelector('#modal-img') as HTMLElement
+	const modalImg = modal.querySelector('img') as HTMLImageElement
 
 	buttons.forEach((button) => {
 		button.addEventListener('click', () => {
-			const img = button.querySelector('img') as HTMLImageElement;
+			const img = button.querySelector('img') as HTMLImageElement
 
-			modal.classList.remove('hidden');
-			modal.classList.add('flex');
+			modal.classList.remove('hidden')
+			modal.classList.add('flex')
 
-			modalImg.src = img.src;
-			modalImg.alt = img.alt;
-		});
-	});
+			modalImg.src = img.src
+			modalImg.alt = img.alt
+		})
+	})
 </script>

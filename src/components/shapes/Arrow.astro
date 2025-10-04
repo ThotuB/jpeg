@@ -1,22 +1,16 @@
 ---
 interface Props {
-	class?: string;
+	class?: string
 }
 
-const { class: className = '' } = Astro.props;
+const { class: className = '' } = Astro.props
 ---
 
-<div class={`${className} w-2 h-24 flex flex-col`}>
-	<div class='flex-1 bg-secondary rotate-6'></div>
-	<div class='flex-1 bg-secondary rotate-6 relative'></div>
-	<div class='relative'>
-		<div
-			class='absolute h-6 w-2 bg-secondary rotate-[30deg] -top-6 -right-1'
-		>
-		</div>
-		<div
-			class='absolute h-6 w-2 bg-secondary -rotate-[30deg] -top-6 -left-2'
-		>
-		</div>
+<div class={`${className} w-1 h-12 flex flex-col`}>
+	<div class="flex-1 rotate-6 bg-secondary"></div>
+	<div class="relative flex-1 rotate-6 bg-secondary"></div>
+	<div class="relative">
+		<div class="absolute -right-0.5 -top-3 h-3 w-1 rotate-[30deg] bg-secondary"></div>
+		<div class="absolute -left-1 -top-3 h-3 w-1 -rotate-[30deg] bg-secondary"></div>
 	</div>
 </div>

@@ -1,31 +1,31 @@
 ---
 interface Props {
-	title: string;
-	class?: string;
-	children?: any;
+	title: string
+	class?: string
+	children?: any
 }
 
-const { title, class: className = '' } = Astro.props;
+const { title, class: className = '' } = Astro.props
 
 const kebabCaseTitle = title
 	.replace(/[^\w\s]/g, '')
 	.replace(/([a-z])([A-Z])/g, '$1-$2')
 	.replace(/\s+/g, '-')
-	.toLowerCase();
+	.toLowerCase()
 ---
 
-<div data-section id={kebabCaseTitle} class='flex flex-row pb-8 pt-14'>
-	<div class='flex-1 relative mxs:hidden'>
-		<div class={`absolute mxl:hidden w-full -top-6 flex flex-row ${className}`}>
+<div data-section id={kebabCaseTitle} class="flex flex-row py-4">
+	<div class="relative flex-1 mxs:hidden">
+		<div class={`absolute mxl:hidden w-full flex flex-row ${className}`}>
 			<slot />
 		</div>
 	</div>
-	<div class='flex flex-row flex-1 h-min'>
-		<div class='bg-secondary -mr-1 -rotate-2 -skew-x-2 flex flex-col justify-center'>
-			<h2 class='text-2xl text-primary font-black px-8 py-4 mxs:text-lg'>
+	<div class="flex h-min flex-1 flex-row">
+		<div class="-mr-1 flex -rotate-2 -skew-x-2 flex-col justify-center bg-secondary">
+			<h2 class="px-4 py-2 text-xl font-black text-primary mxs:text-lg">
 				{title}
 			</h2>
 		</div>
-		<div class='bg-secondary rotate-2 skew-x-2 flex-1 -mr-px'></div>
+		<div class="-mr-px flex-1 rotate-2 skew-x-2 bg-secondary"></div>
 	</div>
 </div>
