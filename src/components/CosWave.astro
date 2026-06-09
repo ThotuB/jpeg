@@ -1,29 +1,29 @@
 ---
-import CoefSquare from './CoefSquare';
-import ColonIcon from './svgs/ColonIcon.astro';
-import CosineIcon from './svgs/CosineIcon.astro';
+import CoefSquare from './CoefSquare'
+import ColonIcon from './svgs/ColonIcon.astro'
+import CosineIcon from './svgs/CosineIcon.astro'
 
 interface Props {
-	frequency: number;
-	points: number[];
+	frequency: number
+	points: number[]
 }
 
-const { frequency, points = [] } = Astro.props;
+const { frequency, points = [] } = Astro.props
 ---
 
-<div class='flex flex-row items-center justify-center gap-4 flex-1'>
-	<div class='border-8 border-secondary rounded-3xl py-2 bg-primary'>
+<div class="flex min-w-0 flex-1 flex-row items-center justify-center gap-2">
+	<div class="border-secondary bg-primary w-24 shrink-0 rounded-3xl border-8 py-2 max-sm:w-16">
 		<CosineIcon
 			frequency={frequency}
 			points={points}
-			class='w-full h-32'
+			class="h-24 w-full max-sm:h-16"
 			viewBox={[200, 100]}
 		/>
 	</div>
-	<ColonIcon class='w-8' />
+	<ColonIcon class="w-6 shrink-0" />
 	<div
-		class='border-4 border-secondary rounded-2xl flex flex-row text-2xl font-bold font-mono'
+		class="border-secondary bg-secondary grid min-w-0 flex-1 grid-cols-8 rounded-2xl border-4 font-mono text-2xl font-bold"
 	>
-		{points.map((y) => <CoefSquare value={y} client:only='solid-js' />)}
+		{points.map((y) => <CoefSquare value={y} client:only="solid-js" />)}
 	</div>
 </div>

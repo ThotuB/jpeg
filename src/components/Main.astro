@@ -257,7 +257,7 @@ const progress = (task: string, progress: number, total: number) => {
 			</div>
 			<div
 				class='font-mono border-4 border-secondary rounded-xl px-4 py-2 bg-primary text-2xl font-bold text-secondary
-						mxs:text-lg'
+						max-xs:text-lg'
 			>
 				0010110100101010001001...
 			</div>
@@ -269,18 +269,18 @@ const progress = (task: string, progress: number, total: number) => {
 		</SectionHeader>
 		<Section
 			text={[
-				'soi - start of image marker',
+				'soi  - start of image marker',
 				'app0 - app specific metadata',
-				'dqt - specifies one or more quantization tables',
-				'dht - specifies one or more huffman table',
+				'dqt  - specifies one or more quantization tables',
+				'dht  - specifies one or more huffman table',
 				'sof0 - specifies the image dimensions, the number of components and the component subsampling',
-				'sos - start of scan marker',
-				'eoi - end of image marker',
+				'sos  - start of scan marker',
+				'eoi  - end of image marker',
 			]}
 			subtext={progress('Compressing', 10, 10) + ' - COMPLETE'}
 		>
 			<div
-				class='font-mono border-4 border-secondary rounded-xl py-4 px-8 bg-primary text-2xl font-bold text-secondary mxs:text-xs'
+				class='font-mono border-4 border-secondary rounded-xl py-4 px-8 bg-primary text-2xl font-bold text-secondary max-xs:text-xs'
 			>
 				<pre><span class="text-retro-2">struct</span> <span class="text-retro-7">Jpeg</span> {'{'}<br /></pre>
 				<pre>	soi	  <span class="text-retro-7">byte</span>[2]; <span class="text-retro-4"># start of image</span><br /></pre>
@@ -300,7 +300,7 @@ const progress = (task: string, progress: number, total: number) => {
 	<Chapter title='Decompression' class='bg-retro-2'>
 		<Section subtext='Starting decompression...'>
 			<div
-				class='font-mono border-4 border-secondary rounded-xl py-4 px-8 bg-primary text-2xl font-bold text-secondary mxs:text-xs'
+				class='font-mono border-4 border-secondary rounded-xl py-4 px-8 bg-primary text-2xl font-bold text-secondary max-xs:text-xs'
 			>
 				<pre>     00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F Decoded text</pre>
 				<pre><span class="text-retro-1">0000</span> FF DB FF E0 00 10 4A <span class="bg-retro-2">46</span> 49 46 00 01 01 01 00 48 ......J<span class="bg-retro-2">F</span>IF.....H</pre>
@@ -340,7 +340,7 @@ const progress = (task: string, progress: number, total: number) => {
 			subtext={progress('Decompressing', 2, 10)}
 		>
 			<div
-				class='font-mono border-4 border-secondary rounded-xl px-4 py-4 bg-primary text-2xl font-bold text-secondary mxs:text-lg'
+				class='font-mono border-4 border-secondary rounded-xl px-4 py-4 bg-primary text-2xl font-bold text-secondary max-xs:text-lg'
 			>
 				{'{'}
 				[(0, 6), 35],
@@ -363,7 +363,7 @@ const progress = (task: string, progress: number, total: number) => {
 			subtext={progress('Decompressing', 3, 10)}
 		>
 			<div
-				class='font-mono border-4 border-secondary rounded-xl px-4 py-2 bg-primary text-2xl font-bold text-secondary mxs:text-lg'
+				class='font-mono border-4 border-secondary rounded-xl px-4 py-2 bg-primary text-2xl font-bold text-secondary max-xs:text-lg'
 			>
 				35, 12, -12, 0, -5, 0, -1, 0, 0, 9, 0, 4, 0, 0, 0, 0 ...
 			</div>
@@ -577,7 +577,7 @@ const progress = (task: string, progress: number, total: number) => {
 				class='max-w-2xl w-full border-8 border-secondary rounded-3xl relative flex justify-center items-center'
 			>
 				<div
-					class='absolute text-secondary font-bold text-3xl font-mono grid grid-cols-8 gap-y-4 gap-x-1 w-full mxs:text-base'
+					class='absolute text-secondary font-bold text-3xl font-mono grid grid-cols-8 gap-y-4 gap-x-1 w-full max-xs:text-base'
 				>
 					<div class='col-span-4'></div>
 					<Fraction numerator='9π' denominator='16' />
@@ -601,7 +601,7 @@ const progress = (task: string, progress: number, total: number) => {
 		<!--? DCT Coefficients -->
 		<SectionHeader title='DCT Coefficients' />
 		<div
-			class='grid grid-rows-4 grid-flow-col items-center gap-y-4 gap-x-16'
+			class='grid grid-rows-4 grid-flow-col items-center gap-y-4 gap-x-16 max-sm:grid-rows-8 max-sm:grid-flow-row max-sm:gap-x-0'
 		>
 			<CosWave frequency={0} points={[1, 1, 1, 1, 1, 1, 1, 1]} />
 			<CosWave
@@ -682,21 +682,21 @@ const progress = (task: string, progress: number, total: number) => {
 	<Chapter title='Observations' class='bg-retro-2'>
 		<!--! Compression-Decompression -->
 		<SectionHeader title='Compression-Decompression' />
-		<div class='flex flex-row gap-16 justify-center items-center mxs:flex-col'>
+		<div class='flex flex-row gap-16 justify-center items-center max-xs:flex-col'>
 			<Image class='bg-secondary w-1/5 h-1/5' src='anime.png' />
-			<Arrow class='-rotate-90 mxs:rotate-0' />
+			<Arrow class='-rotate-90 max-xs:rotate-0' />
 			<Image class='bg-secondary w-1/5 h-1/5' src='decompressed.png' />
 		</div>
 
 		<!--! Multiple Compression Rounds -->
 		<SectionHeader title='Multiple Compression Rounds' />
-		<div class='flex flex-row gap-16 justify-center items-center mxs:flex-col mxs:gap-4'>
+		<div class='flex flex-row gap-16 justify-center items-center max-xs:flex-col max-xs:gap-4'>
 			<Image class='bg-secondary' src='anime.png' />
-			<Arrow class='-rotate-90 mxs:rotate-0' />
+			<Arrow class='-rotate-90 max-xs:rotate-0' />
 			<Image class='bg-secondary' src='decompressed.png' />
-			<Arrow class='-rotate-90 mxs:rotate-0' />
+			<Arrow class='-rotate-90 max-xs:rotate-0' />
 			<Dots />
-			<Arrow class='-rotate-90 mxs:rotate-0' />
+			<Arrow class='-rotate-90 max-xs:rotate-0' />
 			<Image class='bg-secondary' src='multiple.png' />
 		</div>
 

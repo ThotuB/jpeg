@@ -7,10 +7,10 @@ const { class: className = '' } = Astro.props
 ---
 
 <div class={`${className} w-1 h-12 flex flex-col`}>
-	<div class="flex-1 rotate-6 bg-secondary"></div>
-	<div class="relative flex-1 rotate-6 bg-secondary"></div>
+	<div class="bg-secondary flex-1 rotate-6"></div>
+	<div class="bg-secondary relative flex-1 rotate-6"></div>
 	<div class="relative">
-		<div class="absolute -right-0.5 -top-3 h-3 w-1 rotate-[30deg] bg-secondary"></div>
-		<div class="absolute -left-1 -top-3 h-3 w-1 -rotate-[30deg] bg-secondary"></div>
+		<div class="bg-secondary absolute -top-3 -right-0.5 h-3 w-1 rotate-[30deg]"></div>
+		<div class="bg-secondary absolute -top-3 -left-1 h-3 w-1 -rotate-[30deg]"></div>
 	</div>
 </div>

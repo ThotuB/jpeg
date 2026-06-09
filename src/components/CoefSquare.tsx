@@ -3,16 +3,6 @@ interface Props {
 }
 
 export default function CoefSquare({ value }: Props) {
-	const computedStyle = getComputedStyle(document.body)
-
-	//     const h1 = parseInt(computedStyle.getPropertyValue('--h-primary'));
-	//     const s1 = parseInt(computedStyle.getPropertyValue('--s-primary'));
-	//     const l1 = parseInt(computedStyle.getPropertyValue('--l-primary'));
-	//
-	//     const h2 = parseInt(computedStyle.getPropertyValue('--h-secondary'));
-	//     const s2 = parseInt(computedStyle.getPropertyValue('--s-secondary'));
-	//     const l2 = parseInt(computedStyle.getPropertyValue('--l-secondary'));
-
 	const h1 = 0
 	const s1 = 0
 	const l1 = 0
@@ -29,9 +19,8 @@ export default function CoefSquare({ value }: Props) {
 
 	return (
 		<div
-			class={`flex h-20 w-20 items-center justify-center border-4 border-secondary ${
-				value > 0 ? 'text-primary' : 'text-secondary'
-			}`}
+			class={`flex aspect-square w-full rounded-xl items-center justify-center border-4 border-secondary text-[clamp(0.5rem,1.5vw,1rem)] ${value > 0 ? 'text-primary' : 'text-secondary'
+				}`}
 			style={{
 				'background-color': `hsl(${h}, ${s}%, ${l}%)`
 			}}

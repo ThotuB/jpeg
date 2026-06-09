@@ -1,7 +1,8 @@
-import { For, JSX, Show, createSignal } from 'solid-js'
+import { For, Show, createSignal } from 'solid-js'
+import type { JSX } from 'solid-js/jsx-runtime'
 
 interface SelectProps {
-	children: JSX.ArrayElement
+	children: JSX.Element[]
 	length: number
 	selected?: number
 }

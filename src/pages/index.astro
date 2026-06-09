@@ -1,40 +1,33 @@
 ---
-import Footer from 'components/header-footer/Footer.astro';
-import Header from 'components/header-footer/Header.astro';
-import Main from 'components/Main.astro';
-import Modal from '../layouts/Modal.astro';
-import RetroCircle from '../layouts/RetroCircle.astro';
-import 'styles/global.css';
+import Footer from 'components/header-footer/Footer.astro'
+import Header from 'components/header-footer/Header.astro'
+import Main from 'components/Main.astro'
+import Modal from '../layouts/Modal.astro'
+import RetroCircle from '../layouts/RetroCircle.astro'
+import 'styles/global.css'
 ---
 
-<!DOCTYPE html>
-<html lang='en'>
+<!doctype html>
+<html lang="en">
 	<head>
-		<meta charset='utf-8' />
-		<meta
-			name='viewport'
-			content='width=device-width, initial-scale=1, shrink-to-fit=yes'
-		/>
-		<meta name='description' content='' />
-		<meta name='author' content='' />
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes" />
+		<meta name="description" content="" />
+		<meta name="author" content="" />
 		<title>JPEG Compression</title>
 
-		<link rel='icon' type='image/x-icon' href='favicon.svg' />
+		<link rel="icon" type="image/x-icon" href="favicon.svg" />
 	</head>
 	<body
-		data-theme='pink-purple'
-		class='scrollbar overflow-hidden font-bit bg-primary max-h-screen'
+		data-theme="pink-purple"
+		class="scrollbar font-bit bg-primary relative max-h-screen overflow-hidden"
 	>
-		<Modal id='modal-img'>
+		<Modal id="modal-img">
 			<RetroCircle>
-				<img
-					class='pixelated rounded-xl h-full select-none'
-					src='anime.png'
-					alt='anime'
-				/>
+				<img class="pixelated h-full rounded-xl select-none" src="anime.png" alt="anime" />
 			</RetroCircle>
 		</Modal>
-		<div class='scrollbar overflow-x-hidden max-h-screen'>
+		<div class="scrollbar max-h-screen overflow-x-hidden">
 			<Header />
 			<Main />
 			<Footer />
@@ -43,19 +36,19 @@ import 'styles/global.css';
 
 	<script>
 		const scrollToWindowHash = () => {
-			const hash = window.location.hash;
+			const hash = window.location.hash
 
 			if (!hash) {
-				return;
+				return
 			}
 
-			const section = document.querySelector(hash);
+			const section = document.querySelector(hash)
 
 			if (section) {
-				section.scrollIntoView();
+				section.scrollIntoView({ behavior: 'smooth', block: 'start' })
 			}
-		};
+		}
 
-		scrollToWindowHash();
+		scrollToWindowHash()
 	</script>
 </html>

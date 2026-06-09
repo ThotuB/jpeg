@@ -1,43 +1,39 @@
 ---
-import Image from './Image.astro';
-import Arrow from './shapes/Arrow.astro';
-import ColonIcon from './svgs/ColonIcon.astro';
+import Image from './Image.astro'
+import Arrow from './shapes/Arrow.astro'
+import ColonIcon from './svgs/ColonIcon.astro'
 
 interface Props {
-	src: string;
-	name: string;
-	table: number[][];
+	src: string
+	name: string
+	table: number[][]
 }
 
-const { src, name, table } = Astro.props;
+const { src, name, table } = Astro.props
 ---
 
-<div class='flex flex-col gap-4'>
+<div class="flex flex-col gap-4">
 	<div
-		class='font-mono w-fit border-4 border-secondary rounded-xl px-4 py-2 bg-primary text-2xl font-bold text-secondary'
+		class="border-secondary bg-primary text-secondary w-fit rounded-xl border-4 px-4 py-2 font-mono text-2xl font-bold"
 	>
 		{name} Factor Quantization
 	</div>
-	<div class='flex flex-row gap-16 items-center'>
+	<div class="flex flex-row items-center gap-16">
 		<div
-			class='font-mono w-fit border-4 border-secondary rounded-xl px-4 py-2 bg-primary text-2xl font-bold text-secondary grid grid-cols-8 grid-flow-row'
+			class="border-secondary bg-primary text-secondary grid w-fit grid-flow-row grid-cols-8 rounded-xl border-4 px-4 py-2 font-mono text-2xl font-bold"
 		>
 			{
 				table
 					.flat()
-					.map((v) => (
-						<div class='w-8 h-8 flex justify-center items-center'>
-							{v}
-						</div>
-					))
+					.map((v) => <div class="flex h-8 w-8 items-center justify-center">{v}</div>)
 			}
 		</div>
-		<ColonIcon class='text-secondary w-12' />
-		<Image class='bg-gray-500' src={`${src}-chunk_quant.png`} />
-		<Arrow class='-rotate-90' />
-		<Image class='bg-gray-500' src={`${src}-chunk_dequant.png`} />
-		<Arrow class='-rotate-90' />
-		<Image class='bg-gray-500' src={`${src}-chunk_idct.png`} />
-		<Image class='bg-gray-500' src={`${src}-rgb.png`} />
+		<ColonIcon class="text-secondary w-12" />
+		<Image class="bg-gray-500" src={`${src}-chunk_quant.png`} />
+		<Arrow class="-rotate-90" />
+		<Image class="bg-gray-500" src={`${src}-chunk_dequant.png`} />
+		<Arrow class="-rotate-90" />
+		<Image class="bg-gray-500" src={`${src}-chunk_idct.png`} />
+		<Image class="bg-gray-500" src={`${src}-rgb.png`} />
 	</div>
 </div>

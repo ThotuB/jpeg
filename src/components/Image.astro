@@ -8,8 +8,12 @@ interface Props {
 const { src, class: className, id } = Astro.props as Props
 ---
 
-<button id={id} class={`${className} p-2 rounded-2xl w-48 aspect-square mxs:w-48`} data-zoom-button>
-	<img class="pixelated h-full select-none rounded-xl" src={src} alt="image" />
+<button
+	id={id}
+	class={`${className} p-2 rounded-2xl w-48 aspect-square max-xs:w-48`}
+	data-zoom-button
+>
+	<img class="pixelated h-full rounded-xl select-none" src={src} alt="image" />
 </button>
 
 <script>

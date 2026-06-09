@@ -1,10 +1,10 @@
 ---
 interface Props {
-	letter: string;
-	vals: number[];
+	letter: string
+	vals: number[]
 }
 
-const { letter, vals } = Astro.props;
+const { letter, vals } = Astro.props
 ---
 
 <div
@@ -14,7 +14,7 @@ const { letter, vals } = Astro.props;
 		vals.map((i) => (
 			<>
 				{vals.map((j) => (
-					<div class='flex justify-center border-2 border-secondary items-center w-16 h-16'>
+					<div class="border-secondary flex h-16 w-16 items-center justify-center border-2">
 						{letter}
 						<sub>{`${i}${j}`}</sub>
 					</div>

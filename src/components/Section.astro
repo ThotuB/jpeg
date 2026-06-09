@@ -10,17 +10,17 @@ interface Props {
 const { text = [], subtext } = Astro.props as Props
 ---
 
-<div class="flex flex-row mxl:flex-col mxl:gap-6">
-	<div class="flex flex-1 flex-row items-center justify-evenly gap-4 px-4 mxs:flex-col">
+<div class="flex flex-row max-xl:flex-col max-xl:gap-6">
+	<div class="max-xs:flex-col flex flex-1 flex-row items-center justify-evenly gap-4 px-4">
 		<slot />
 	</div>
-	<div class="flex flex-1 flex-col gap-6 px-2 font-mono font-bold mxl:px-4 mxl:text-base">
-		<div class="flex-1 skew-x-6 text-secondary mxs:skew-x-0">
+	<div class="flex flex-1 flex-col gap-6 px-2 font-mono max-xl:px-4 max-xl:text-base">
+		<div class="text-secondary max-xs:skew-x-0 flex-1 skew-x-6">
 			<TerminalText text={text} client:visible />
 		</div>
 		{
 			subtext && (
-				<div class="-skew-x-6 text-right text-retro-3">
+				<div class="text-retro-3 -skew-x-6 text-right">
 					<p class="px-6">$ {subtext}</p>
 				</div>
 			)

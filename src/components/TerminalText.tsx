@@ -33,7 +33,7 @@ export default function TerminalText({ text: finalText }: Props) {
 					))}
 			</div>
 			<div class="invisible">
-				{finalText.map((line, i) => (
+				{finalText.map((line, _) => (
 					<p>$ {line}</p>
 				))}
 			</div>

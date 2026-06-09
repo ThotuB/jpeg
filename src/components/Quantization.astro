@@ -1,52 +1,52 @@
 ---
-import Image from './Image.astro';
-import Arrow from './shapes/Arrow.astro';
+import Image from './Image.astro'
+import Arrow from './shapes/Arrow.astro'
 
 interface Props {
-	src: string;
+	src: string
 }
 
-const { src } = Astro.props;
+const { src } = Astro.props
 ---
 
 <div
-	class='flex flex-row gap-16 justify-center items-center font-mono font-bold text-secondary text-2xl mt-16'
+	class="text-secondary mt-16 flex flex-row items-center justify-center gap-16 font-mono text-2xl font-bold"
 >
-	<Image class='bg-gray-500' src={`${src}.png`} />
-	<div class='relative'>
+	<Image class="bg-gray-500" src={`${src}.png`} />
+	<div class="relative">
 		<div
-			class='absolute w-96 -top-40 -translate-x-1/2 text-center border-4 border-secondary rounded-xl px-4 py-2 bg-primary'
+			class="border-secondary bg-primary absolute -top-40 w-96 -translate-x-1/2 rounded-xl border-4 px-4 py-2 text-center"
 		>
 			Discrete Cosine Transform
 		</div>
-		<Arrow class='-rotate-90' />
+		<Arrow class="-rotate-90" />
 	</div>
-	<Image class='bg-gray-500' src={`${src}_dct.png`} />
-	<div class='relative'>
+	<Image class="bg-gray-500" src={`${src}_dct.png`} />
+	<div class="relative">
 		<div
-			class='absolute w-96 -top-40 -translate-x-1/2 text-center border-4 border-secondary rounded-xl px-4 py-2 bg-primary'
+			class="border-secondary bg-primary absolute -top-40 w-96 -translate-x-1/2 rounded-xl border-4 px-4 py-2 text-center"
 		>
 			Quantization
 		</div>
-		<Arrow class='-rotate-90' />
+		<Arrow class="-rotate-90" />
 	</div>
-	<Image class='bg-gray-500' src={`${src}_quant.png`} />
-	<div class='relative'>
+	<Image class="bg-gray-500" src={`${src}_quant.png`} />
+	<div class="relative">
 		<div
-			class='absolute w-96 -top-40 -translate-x-1/2 text-center border-4 border-secondary rounded-xl px-4 py-2 bg-primary'
+			class="border-secondary bg-primary absolute -top-40 w-96 -translate-x-1/2 rounded-xl border-4 px-4 py-2 text-center"
 		>
 			Dequantization
 		</div>
-		<Arrow class='-rotate-90' />
+		<Arrow class="-rotate-90" />
 	</div>
-	<Image class='bg-gray-500' src={`${src}_dequant.png`} />
-	<div class='relative'>
+	<Image class="bg-gray-500" src={`${src}_dequant.png`} />
+	<div class="relative">
 		<div
-			class='absolute w-96 -top-40 -translate-x-1/2 text-center border-4 border-secondary rounded-xl px-4 py-2 bg-primary'
+			class="border-secondary bg-primary absolute -top-40 w-96 -translate-x-1/2 rounded-xl border-4 px-4 py-2 text-center"
 		>
 			Inverse DCT
 		</div>
-		<Arrow class='-rotate-90' />
+		<Arrow class="-rotate-90" />
 	</div>
-	<Image class='bg-gray-500' src={`${src}_idct.png`} />
+	<Image class="bg-gray-500" src={`${src}_idct.png`} />
 </div>

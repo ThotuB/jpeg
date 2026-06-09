@@ -1,11 +1,11 @@
 ---
 interface Props {
-	letter: string;
-	vals: number[];
-	transposed?: boolean;
+	letter: string
+	vals: number[]
+	transposed?: boolean
 }
 
-const { letter, vals, transposed } = Astro.props;
+const { letter, vals, transposed } = Astro.props
 ---
 
 <div
@@ -15,7 +15,7 @@ const { letter, vals, transposed } = Astro.props;
 >
 	{
 		vals.map((y) => (
-			<div class='flex justify-center border-2 border-secondary items-center w-16 h-16'>
+			<div class="border-secondary flex aspect-square items-center justify-center border-2 text-[clamp(0.5rem,2vw,1rem)]">
 				{letter}
 				<sub>{y}</sub>
 			</div>

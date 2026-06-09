@@ -1,6 +1,6 @@
 import Cassette from './Cassette.tsx'
 import Select from '../utility/Select.tsx'
-import { Theme, themes } from 'types/theme.ts'
+import { type Theme, themes } from 'types/theme.ts'
 
 export default function ThemeSelect() {
 	const cachedTheme = (localStorage.getItem('theme') as Theme | null) || 'pink-purple'
